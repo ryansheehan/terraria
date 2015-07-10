@@ -2,9 +2,6 @@ FROM ubuntu:latest
 
 MAINTAINER Ryan Sheehan <rsheehan@gmail.com>
 
-ENV TSHOCK_VERSION 4.3.2
-ENV TSHOCK_FILE_POSTFIX -pre1
-
 # Allow for external data
 VOLUME ["/tshock/world"]
 
@@ -22,6 +19,9 @@ RUN apt-get update && apt-get install -y \
 RUN favorites_path="/root/My Games/Terraria" && mkdir -p "$favorites_path" && echo "{}" > "$favorites_path/favorites.json"
 
 # Download and install TShock
+ENV TSHOCK_VERSION 4.3.3
+ENV TSHOCK_FILE_POSTFIX -pre1
+
 ADD https://github.com/NyxStudios/TShock/releases/download/v$TSHOCK_VERSION/tshock_$TSHOCK_VERSION$TSHOCK_FILE_POSTFIX.zip /
 RUN unzip tshock_$TSHOCK_VERSION$TSHOCK_FILE_POSTFIX.zip -d /tshock
 RUN rm tshock_$TSHOCK_VERSION$TSHOCK_FILE_POSTFIX.zip
