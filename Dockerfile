@@ -3,7 +3,7 @@ FROM ubuntu:latest
 MAINTAINER Ryan Sheehan <rsheehan@gmail.com>
 
 ENV TSHOCK_VERSION 4.3.2
-ENV TSHOCK_FILE_POSTFIX _pre1
+ENV TSHOCK_FILE_POSTFIX -pre1
 
 # Allow for external data
 VOLUME ["/tshock/world"]
