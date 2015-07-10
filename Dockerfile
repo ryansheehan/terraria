@@ -3,7 +3,7 @@ FROM ubuntu:latest
 MAINTAINER Ryan Sheehan <rsheehan@gmail.com>
 
 # Allow for external data
-VOLUME ["/tshock/world"]
+VOLUME ["/world"]
 
 # Add mono repository
 RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF && \
@@ -33,4 +33,4 @@ WORKDIR /tshock
 RUN chmod 777 TerrariaServer.exe
 
 # run the server
-ENTRYPOINT ["mono", "--server", "--gc=sgen", "-O=all", "TerrariaServer.exe", "-configpath", "/tshock/world", "-worldpath", "/tshock/world", "-logpath", "/tshock/world"]
+ENTRYPOINT ["mono", "--server", "--gc=sgen", "-O=all", "TerrariaServer.exe", "-configpath", "/world", "-worldpath", "/world", "-logpath", "/world"]
