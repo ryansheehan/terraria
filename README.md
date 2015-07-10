@@ -72,6 +72,21 @@ where *your_process_name* is the same as what was defined by the --name argument
 sudo docker ps -a
 ```
 
+## Plugin Support
+A volume exists to support plugins.  In your world directory create a new directory to hold all the plugins.
+```
+mkdir ServerPlugins
+```
+
+**WARNING**
+If you want to maintain any of the plugins that ship with tshock, you will need to copy them into the ServerPlugins folder.  Mounting the plugins folder will override the plugins that ship with tshock.
+
+To mount the server plugins add the after the -v switch that mounts the world directory
+```
+-v <path_to_your_ServerPlugins_folder>:/tshock/ServerPlugins
+```
+
+
 ## Notes
 * sudo may not be required if logged into your linux machine as the root user.
 
