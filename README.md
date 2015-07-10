@@ -36,7 +36,7 @@ mkdir -p $HOME/terraria/world
 
 ### For an interactive first time run
 ```
-sudo docker run -it --name="make_up_a_name" -p 7777:7777 -v $HOME/terraria/world:/tshock/world your_name_here/terraria
+sudo docker run -it --name="make_up_a_name" -p 7777:7777 -v $HOME/terraria/world:/world your_name_here/terraria
 ```
 this will walk you through creating your first world, and generate all your config files.  *make_up_a_name* is just a name you attach to the running container.  You will need to reference this when attaching to a background running container, or killing the docker process
 
@@ -47,7 +47,7 @@ press CTRL-p CTRL-q.  Now you should be able to end your ssh session without it 
 
 ### To start your server in the background
 ```
-sudo docker run -dit --name="make_up_a_name" -p 7777:7777 -v $HOME/terraria/world:/tshock/world your_name_here/terraria -world /tshock/world/your_world_name.wld
+sudo docker run -dit --name="make_up_a_name" -p 7777:7777 -v $HOME/terraria/world:/world your_name_here/terraria -world /world/your_world_name.wld
 ```
 where *your_world_name* is the name of the world you chose during the creation process
 
