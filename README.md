@@ -106,5 +106,5 @@ Email me rsheehan at gmail dot com if any of these instructions do not seem to w
 
 ## TODO
 
-* Commit container to docker hub
 * Write instructions on how to pull a prebuilt image stored on docker hub and launch a terraria server
+* Fork TShock and create a Dockerfile to build the project
