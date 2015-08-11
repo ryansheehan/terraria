@@ -19,9 +19,9 @@ RUN favorites_path="/root/My Games/Terraria" && mkdir -p "$favorites_path" && ec
 ENV TSHOCK_VERSION 4.3.8
 ENV TSHOCK_FILE_POSTFIX -rel
 
-ADD https://github.com/NyxStudios/TShock/releases/download/v$TSHOCK_VERSION/tshock_$TSHOCK_VERSION$TSHOCK_FILE_POSTFIX.zip /
-RUN unzip tshock_$TSHOCK_VERSION$TSHOCK_FILE_POSTFIX.zip -d /tshock
-RUN rm tshock_$TSHOCK_VERSION$TSHOCK_FILE_POSTFIX.zip
+ADD https://github.com/NyxStudios/TShock/releases/download/v$TSHOCK_VERSION/tshock-$TSHOCK_VERSION$TSHOCK_FILE_POSTFIX.zip /
+RUN unzip tshock-$TSHOCK_VERSION$TSHOCK_FILE_POSTFIX.zip -d /tshock
+RUN rm tshock-$TSHOCK_VERSION$TSHOCK_FILE_POSTFIX.zip
 
 # Allow for external data
 VOLUME ["/world", "/tshock/ServerPlugins"]
