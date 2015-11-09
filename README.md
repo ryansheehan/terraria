@@ -68,7 +68,7 @@ tell docker how to foward ports from the server to the docker container
 ```
 -p 7777:7777
 
-7777 is the default port terraria works on.  
+7777 is the default port terraria works on.
 
 You could run multiple containers with different ports.
 for example you could run the docker command with -p 7778:7777 which forwards your server port 7778 to the containers 7777 port.  No need to change your terraria-server's port information
@@ -114,7 +114,7 @@ Any additional TerrariaServer.exe command-line commands can be passed at this po
 
 
 
-## *Installation *
+## *Installation*
 ### Setting up your linux machine, and building the docker container from the dockerfile
 
 Provision a linux machine that can support docker and containerization.  For more information visit [docker](https://www.docker.com/).  For a small or medium world with no more than 8 users a linux machine with 1-1.5GB of ram should suffice.  **If you are running a vm in the cloud, make sure to expose tcp port 7777 and udp port 7777.**
