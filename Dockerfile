@@ -1,4 +1,4 @@
-FROM ubuntu:latest
+FROM ubuntu:14.04.4
 
 MAINTAINER Ryan Sheehan <rsheehan@gmail.com>
 
