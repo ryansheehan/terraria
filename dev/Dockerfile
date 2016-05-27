@@ -1,4 +1,4 @@
-FROM ubuntu:latest
+FROM ubuntu:14.04.4
 
 MAINTAINER Ryan Sheehan <rsheehan@gmail.com>
 
@@ -16,10 +16,10 @@ RUN apt-get update && apt-get install -y \
 RUN favorites_path="/root/My Games/Terraria" && mkdir -p "$favorites_path" && echo "{}" > "$favorites_path/favorites.json"
 
 # Download and install TShock
-ENV TSHOCK_DEV_BUILD 529
+ENV TSHOCK_DEV_BUILD 618
 ENV TSHOCK_DEV_ZIP tshock_release.zip
 
-ADD http://direct.tshock.co:8085/browse/TERRA-TSHOCK-$TSHOCK_DEV_BUILD/artifact/shared/$TSHOCK_DEV_ZIP/$TSHOCK_DEV_ZIP /
+ADD https://bamboo.tshock.co/browse/TERRA-TSHOCK-$TSHOCK_DEV_BUILD/artifact/shared/$TSHOCK_DEV_ZIP/$TSHOCK_DEV_ZIP /
 RUN unzip $TSHOCK_DEV_ZIP -d /tshock
 RUN rm $TSHOCK_DEV_ZIP
 
