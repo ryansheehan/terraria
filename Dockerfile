@@ -16,7 +16,7 @@ RUN apt-get update && apt-get install -y \
 RUN favorites_path="/root/My Games/Terraria" && mkdir -p "$favorites_path" && echo "{}" > "$favorites_path/favorites.json"
 
 # Download and install TShock
-ENV TSHOCK_VERSION 4.3.13
+ENV TSHOCK_VERSION 4.3.16
 ENV TSHOCK_FILE_POSTFIX ""
 
 ADD https://github.com/NyxStudios/TShock/releases/download/v$TSHOCK_VERSION/tshock_$TSHOCK_VERSION.zip /
