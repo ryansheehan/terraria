@@ -1,3 +1,4 @@
+[![](https://images.microbadger.com/badges/image/ryshe/terraria.svg)](https://microbadger.com/images/ryshe/terraria "Get your own image badge on microbadger.com")
 # Terraria
 
 This project is a Dockerfile to containerize [TShock](https://tshock.co/xf/index.php) and [Terraria](https://terraria.org/) TerrariaServer.exe to run on linux.  [Docker](https://www.docker.com/) will remove the need for someone to worry about how to setup a server in linux with all the right dependencies to run.  The installation and usage instructions are written with complete beginners in mind.
