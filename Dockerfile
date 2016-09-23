@@ -14,12 +14,12 @@ RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 3FA7E03280
     favorites_path="/root/My Games/Terraria" && mkdir -p "$favorites_path" && echo "{}" > "$favorites_path/favorites.json"
 
 # Download and install TShock
-ENV TSHOCK_VERSION=4.3.17 \
+ENV TSHOCK_VERSION=4.3.18 \
     TSHOCK_FILE_POSTFIX=""
 
-ADD https://github.com/NyxStudios/TShock/releases/download/v$TSHOCK_VERSION/tshock_release.zip /
-RUN unzip tshock_release.zip -d /tshock && \
-    rm tshock_release.zip && \
+ADD https://github.com/NyxStudios/TShock/releases/download/v$TSHOCK_VERSION/tshock_$TSHOCK_VERSION.zip /
+RUN unzip tshock_$TSHOCK_VERSION.zip -d /tshock && \
+    rm tshock_$TSHOCK_VERSION.zip && \
     chmod 777 /tshock/TerrariaServer.exe
 
 # Allow for external data
