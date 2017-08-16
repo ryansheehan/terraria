@@ -2,6 +2,12 @@ FROM ubuntu:14.04.4
 
 MAINTAINER Ryan Sheehan <rsheehan@gmail.com>
 
+# Create symbolic link to ServerLog.txt
+RUN mkdir /world /tshock && \
+    touch /world/ServerLog.txt && \
+    ln -s /world/ServerLog.txt /tshock/ServerLog.txt && \
+    rm -rf /world
+
 # Add mono repository
 # Update and install mono and a zip utility
 # fix for favorites.json error
