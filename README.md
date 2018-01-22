@@ -208,6 +208,8 @@ To mount the server plugins add the after the -v switch that mounts the world di
 
 * Any [additional command-line instructions](https://tshock.atlassian.net/wiki/display/TSHOCKPLUGINS/Command+Line+Parameters) can be added to the end of either method for launching a server.  Docker maps the $HOME/terraria/world linux-host folder to the /tshock/world container-folder.
 
+* Expecting your server to run for a while?  Add `--log-opt max-size=200k` to limit your log file size.  Otherwise one day you will wake up to see all your hdd space chewed up for a terraria docker setup!
+
 ## *Contributing*
 
 Email me rsheehan at gmail dot com if any of these instructions do not seem to work.  I am by far not very familiar with linux or docker, but I will do what I can to maintain this information.
