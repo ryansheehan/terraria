@@ -4,34 +4,35 @@ RUN apk add --update-cache \
     unzip
 
 # Download and install TShock
-ENV TSHOCK_VERSION=4.3.26 
-
-ADD https://github.com/NyxStudios/TShock/releases/download/v$TSHOCK_VERSION/tshock_$TSHOCK_VERSION.zip /
-RUN unzip tshock_$TSHOCK_VERSION.zip -d /tshock && \
-    rm tshock_$TSHOCK_VERSION.zip && \
+ADD https://github.com/Pryaxis/TShock/releases/download/v4.4.0-pre1/TShock_4.4.0_226_Pre1_Terraria1.4.0.2.zip /
+RUN unzip TShock_4.4.0_226_Pre1_Terraria1.4.0.2.zip -d /tshock && \
+    rm TShock_4.4.0_226_Pre1_Terraria1.4.0.2.zip && \
     chmod 777 /tshock/TerrariaServer.exe
 
 FROM mono:6.8.0.96
 
 LABEL maintainer="Ryan Sheehan <rsheehan@gmail.com>"
 
-# Create symbolic link to ServerLog.txt
-# fix for favorites.json error
-RUN mkdir /world /tshock && \
-    touch /world/ServerLog.txt && \
-    ln -s /world/ServerLog.txt /tshock/ServerLog.txt && \
-    rm -rf /world && \
-    favorites_path="/root/My Games/Terraria" && \
-    mkdir -p "$favorites_path" && \
-    echo "{}" > "$favorites_path/favorites.json"
+# documenting ports
+EXPOSE 7777 7878
 
-COPY --from=base /tshock /tshock
+# copy in bootstrap
+COPY bootstrap.sh /tshock/bootstrap.sh
+
+# create directories
+RUN mkdir /world && \
+    mkdir -p /tshock/logs && \
+    mkdir -p /tshock/ServerPlugins &&  \
+    chmod +x /tshock/bootstrap.sh 
 
 # Allow for external data
-VOLUME ["/world", "/tshock/ServerPlugins"]
+VOLUME ["/world", "/tshock/logs", "/tshock/ServerPlugins"]
+
+# copy game files --chown=terraria:terraria
+COPY --from=base /tshock /tshock
 
 # Set working directory to server
 WORKDIR /tshock
 
-# run the server
-ENTRYPOINT ["mono", "--server", "--gc=sgen", "-O=all", "TerrariaServer.exe", "-configpath", "/world", "-worldpath", "/world", "-logpath", "/world"]
+# run the bootstrap, which will copy the TShockAPI.dll before starting the server
+ENTRYPOINT [ "/bin/sh", "bootstrap.sh" ]
