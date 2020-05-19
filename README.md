@@ -1,6 +1,8 @@
 [![](https://images.microbadger.com/badges/image/ryshe/terraria.svg)](https://microbadger.com/images/ryshe/terraria "Get your own image badge on microbadger.com")
 # Terraria
 
+**[UPDATE]** I know a lot of people are excited for Terraria v1.4 Journey's End!  The current latest tag on dockerhub is hand built for the latest pre-release of TShock, which supports v1.4.0.2.  Please be patient, as this is not a full release.  The source code here is still on the 1.3.5.2 release.  This project will update after the TShock team posts their full release.  In the mean time, try out pre-release, and enjoy Terraria 1.4!
+
 This project is a Dockerfile to containerize [TShock](https://tshock.co/xf/index.php) and [Terraria](https://terraria.org/) TerrariaServer.exe to run on linux.  [Docker](https://www.docker.com/) will remove the need for someone to worry about how to setup a server in linux with all the right dependencies to run.  The installation and usage instructions are written with complete beginners in mind.
 
 ## *Quickstart Guide (no need to pull this repository from git!)*
