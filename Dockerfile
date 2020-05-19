@@ -43,7 +43,7 @@ RUN groupadd -r terraria && \
 COPY --chown=terraria:terraria --from=base bootstrap.sh /tshock/bootstrap.sh
 
 # copy game files
-COPY --chown=terraria:terraria --from=base /tshock /
+COPY --chown=terraria:terraria --from=base /tshock/* /tshock
 
 # Allow for external data
 VOLUME ["/world", "/tshock/logs", "/plugins"]
