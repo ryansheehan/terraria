@@ -25,9 +25,9 @@ COPY --from=base /tshock/* /tshock
 # create directories
 RUN mkdir /world && \
     mkdir -p /tshock/logs && \
+    mv /tshock/ServerPlugins /tshock/_ServerPlugins && \
     mkdir -p /tshock/ServerPlugins &&  \
-    chmod +x /tshock/bootstrap.sh 
-    # chmod +x /tshock/TerrariaServer.exe
+    chmod +x /tshock/bootstrap.sh
 
 # Allow for external data
 VOLUME ["/world", "/tshock/logs", "/tshock/ServerPlugins"]

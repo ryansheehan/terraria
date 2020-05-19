@@ -32,6 +32,6 @@ done
 
 echo "\nBootstrap Args:\nconfigpath=$configpath\nworldpath=$worldpath\nlogpath=$logpath\nrest=$@\n"
 
-cp ./TShockAPI.dll ./ServerPlugins
+cp -Rf ./_ServerPlugins/* ./ServerPlugins
 
 mono --server --gc=sgen -O=all TerrariaServer.exe -configPath "$configpath" -worldpath "$worldpath" -logpath "$logpath" "$@" 
