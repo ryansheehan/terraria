@@ -39,7 +39,7 @@ RUN apt-get update -y && \
     mkdir /plugins && \
     mkdir -p /tshock/logs && \
     chmod +x /tshock/bootstrap.sh && \
-    chown -R terraria:terraria /world /tshock/logs /tshock/ServerPlugins
+    chown -R terraria:terraria /world /tshock/logs
 
 # Allow for external data
 VOLUME ["/world", "/tshock/logs", "/plugins"]
