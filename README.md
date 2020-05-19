@@ -134,7 +134,7 @@ mkdir ServerPlugins
 Mount the plugins directory with an additional -v switch on your `docker run ...` command
 
 ```bash
--v <path_to_your_ServerPlugins_folder>:/tshock/ServerPlugins
+-v <path_to_your_ServerPlugins_folder>:/plugins
 ```
 
 ## Logs
