@@ -7,7 +7,7 @@ RUN apk add --update-cache \
 ADD https://github.com/Pryaxis/TShock/releases/download/v4.4.0-pre2/TShock_4.4.0_226_Pre2_Terraria1.4.0.2.zip /
 RUN unzip TShock_4.4.0_226_Pre2_Terraria1.4.0.2.zip -d /tshock && \
     rm TShock_4.4.0_226_Pre2_Terraria1.4.0.2.zip && \
-    chmod 777 /tshock/TerrariaServer.exe
+    chmod +x /tshock/tshock/TerrariaServer.exe
 
 FROM mono:6.8.0.96
 
@@ -19,17 +19,18 @@ EXPOSE 7777 7878
 # copy in bootstrap
 COPY bootstrap.sh /tshock/bootstrap.sh
 
+# copy game files
+COPY --from=base /tshock/* /tshock
+
 # create directories
 RUN mkdir /world && \
     mkdir -p /tshock/logs && \
     mkdir -p /tshock/ServerPlugins &&  \
     chmod +x /tshock/bootstrap.sh 
+    # chmod +x /tshock/TerrariaServer.exe
 
 # Allow for external data
 VOLUME ["/world", "/tshock/logs", "/tshock/ServerPlugins"]
-
-# copy game files --chown=terraria:terraria
-COPY --from=base /tshock /tshock
 
 # Set working directory to server
 WORKDIR /tshock
