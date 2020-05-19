@@ -6,7 +6,7 @@ of [TShock][TShock].  Will continue to update as new releases come out.
 
 This project is a Dockerfile to containerize [TShock][TShock] and [Terraria](https://terraria.org/) TerrariaServer.exe to run on linux.  [Docker][Docker] will remove the need for someone to worry about how to setup a server in linux with all the right dependencies to run.  The installation and usage instructions are written with complete beginners in mind.
 
-## *Quickstart Guide (no need to pull this repository from git!)*
+## Quickstart Guide (no need to pull this repository from git!)
 
 First you need a linux machine with [Docker][Docker] installed. Everything from here on out assumes the docker service is running _(you may need to start the service after install)_.
 
