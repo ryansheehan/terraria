@@ -4,9 +4,9 @@ RUN apk add --update-cache \
     unzip
 
 # Download and install TShock
-ADD https://github.com/Pryaxis/TShock/releases/download/v4.4.0-pre1/TShock_4.4.0_226_Pre1_Terraria1.4.0.2.zip /
-RUN unzip TShock_4.4.0_226_Pre1_Terraria1.4.0.2.zip -d /tshock && \
-    rm TShock_4.4.0_226_Pre1_Terraria1.4.0.2.zip && \
+ADD https://github.com/Pryaxis/TShock/releases/download/v4.4.0-pre2/TShock_4.4.0_226_Pre2_Terraria1.4.0.2.zip /
+RUN unzip TShock_4.4.0_226_Pre2_Terraria1.4.0.2.zip -d /tshock && \
+    rm TShock_4.4.0_226_Pre2_Terraria1.4.0.2.zip && \
     chmod 777 /tshock/TerrariaServer.exe
 
 FROM mono:6.8.0.96
