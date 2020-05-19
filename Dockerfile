@@ -16,24 +16,31 @@ LABEL maintainer="Ryan Sheehan <rsheehan@gmail.com>"
 # documenting ports
 EXPOSE 7777 7878
 
+# add terraria user to run as
+RUN groupadd -r terraria && \
+    useradd -m -r -g terraria terraria
+
 # copy in bootstrap
-COPY bootstrap.sh /tshock/bootstrap.sh
+COPY --chown=terraria:terraria bootstrap.sh /tshock/bootstrap.sh
 
 # copy game files
-COPY --from=base /tshock/* /tshock
+COPY --chown=terraria:terraria --from=base /tshock/* /tshock
 
 # create directories
 RUN mkdir /world && \
     mkdir -p /tshock/logs && \
     mv /tshock/ServerPlugins /tshock/_ServerPlugins && \
     mkdir -p /tshock/ServerPlugins &&  \
-    chmod +x /tshock/bootstrap.sh
+    chmod +x /tshock/bootstrap.sh && \
+    chown -R terraria:terraria /world /tshock/logs /tshock/ServerPlugins /tshock/_ServerPlugins
 
 # Allow for external data
 VOLUME ["/world", "/tshock/logs", "/tshock/ServerPlugins"]
 
 # Set working directory to server
 WORKDIR /tshock
+
+USER terraria
 
 # run the bootstrap, which will copy the TShockAPI.dll before starting the server
 ENTRYPOINT [ "/bin/sh", "bootstrap.sh" ]
