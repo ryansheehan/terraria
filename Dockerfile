@@ -9,12 +9,17 @@ RUN unzip TShock_4.4.0_226_Pre2_Terraria1.4.0.2.zip -d /tshock && \
     rm TShock_4.4.0_226_Pre2_Terraria1.4.0.2.zip && \
     chmod +x /tshock/tshock/TerrariaServer.exe
 
-FROM mono:6.8.0.96
+FROM mono:6.8.0.96-slim
 
 LABEL maintainer="Ryan Sheehan <rsheehan@gmail.com>"
 
 # documenting ports
 EXPOSE 7777 7878
+
+# install nuget to grab tshock dependencies
+RUN apt-get update -y && \
+    apt-get install -y nuget && \
+    rm -rf /var/lib/apt/lists/* /tmp/*
 
 # copy in bootstrap
 COPY bootstrap.sh /tshock/bootstrap.sh
@@ -26,7 +31,7 @@ COPY --from=base /tshock/* /tshock
 RUN mkdir /world && \
     mkdir -p /tshock/logs && \
     mkdir -p /tshock/ServerPlugins &&  \
-    chmod +x /tshock/bootstrap.sh 
+    chmod +x /tshock/bootstrap.sh
     # chmod +x /tshock/TerrariaServer.exe
 
 # Allow for external data
