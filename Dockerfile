@@ -33,7 +33,6 @@ RUN mkdir /world && \
     mv /tshock/ServerPlugins /tshock/_ServerPlugins && \
     mkdir -p /tshock/ServerPlugins &&  \
     chmod +x /tshock/bootstrap.sh
-    chmod +x /tshock/TerrariaServer.exe
 
 # Allow for external data
 VOLUME ["/world", "/tshock/logs", "/tshock/ServerPlugins"]
