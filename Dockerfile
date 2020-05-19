@@ -9,7 +9,7 @@ RUN unzip TShock_4.4.0_226_Pre3_Terraria1.4.0.2.zip -d /tshock && \
     rm TShock_4.4.0_226_Pre3_Terraria1.4.0.2.zip && \
     chmod +x /tshock/tshock/TerrariaServer.exe
 
-FROM mono:6.8.0.96
+FROM mono:6.8.0.96-slim
 
 LABEL maintainer="Ryan Sheehan <rsheehan@gmail.com>"
 
@@ -26,8 +26,12 @@ COPY bootstrap.sh /tshock/bootstrap.sh
 # copy game files
 COPY --from=base /tshock/* /tshock
 
-# create directories
-RUN mkdir /world && \
+# install nuget to grab tshock dependencies
+RUN apt-get update -y && \
+    apt-get install -y nuget && \
+    rm -rf /var/lib/apt/lists/* /tmp/* && \
+    # create directories
+    mkdir /world && \
     mkdir /plugins && \
     mkdir -p /tshock/logs && \
     chmod +x /tshock/bootstrap.sh
