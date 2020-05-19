@@ -20,19 +20,18 @@ ENV WORLDPATH=/world
 ENV CONFIGPATH=/world
 ENV LOGPATH=/tshock/logs
 
-# install nuget to grab tshock dependencies
-RUN apt-get update -y && \
-    apt-get install -y nuget && \
-    rm -rf /var/lib/apt/lists/* /tmp/*
-
 # copy in bootstrap
 COPY bootstrap.sh /tshock/bootstrap.sh
 
 # copy game files
 COPY --from=base /tshock/* /tshock
 
-# create directories
-RUN mkdir /world && \
+# install nuget to grab tshock dependencies
+RUN apt-get update -y && \
+    apt-get install -y nuget && \
+    rm -rf /var/lib/apt/lists/* /tmp/* && \
+    # create directories
+    mkdir /world && \
     mkdir /plugins && \
     mkdir -p /tshock/logs && \
     chmod +x /tshock/bootstrap.sh
