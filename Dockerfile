@@ -16,6 +16,10 @@ LABEL maintainer="Ryan Sheehan <rsheehan@gmail.com>"
 # documenting ports
 EXPOSE 7777 7878
 
+ENV WORLDPATH=/world
+ENV CONFIGPATH=/world
+ENV LOGPATH=/tshock/logs
+
 # copy in bootstrap
 COPY bootstrap.sh /tshock/bootstrap.sh
 
@@ -24,13 +28,12 @@ COPY --from=base /tshock/* /tshock
 
 # create directories
 RUN mkdir /world && \
+    mkdir /plugins && \
     mkdir -p /tshock/logs && \
-    mv /tshock/ServerPlugins /tshock/_ServerPlugins && \
-    mkdir -p /tshock/ServerPlugins &&  \
     chmod +x /tshock/bootstrap.sh
 
 # Allow for external data
-VOLUME ["/world", "/tshock/logs", "/tshock/ServerPlugins"]
+VOLUME ["/world", "/tshock/logs", "/plugins"]
 
 # Set working directory to server
 WORKDIR /tshock
