@@ -4,7 +4,7 @@ RUN apk add --update-cache \
     unzip
 
 # add the bootstrap file
-ADD bootstrap.sh /tshock/bootstrap.sh
+COPY bootstrap.sh /tshock/bootstrap.sh
 
 # Download and unpack TShock
 ADD https://github.com/Pryaxis/TShock/releases/download/v4.4.0-pre4/TShock_4.4.0_226_Pre4v2_Terraria1.4.0.2.zip /
@@ -13,7 +13,6 @@ RUN unzip TShock_4.4.0_226_Pre4v2_Terraria1.4.0.2.zip -d /tshock && \
     chmod +x /tshock/TerrariaServer.exe && \
     # add executable perm to bootstrap
     chmod +x /tshock/bootstrap.sh
-
 
 FROM mono:6.8.0.96-slim
 
@@ -30,25 +29,13 @@ ENV LOGPATH=/tshock/logs
 # Allow for external data
 VOLUME ["/world", "/tshock/logs", "/plugins"]
 
-# add terraria user to run as
-RUN groupadd -r terraria && \
-    useradd -m -r -g terraria terraria && \
-    # install nuget to grab tshock dependencies
-    apt-get update -y && \
+# install nuget to grab tshock dependencies
+RUN apt-get update -y && \
     apt-get install -y nuget && \
-    rm -rf /var/lib/apt/lists/* /tmp/* && \
-    # create directories
-    mkdir -p /tshock/logs && \
-    chown -R terraria:terraria /tshock /world /plugins
-
-# copy in bootstrap
-COPY --chown=terraria:terraria --from=base bootstrap.sh /tshock/bootstrap.sh
+    rm -rf /var/lib/apt/lists/* /tmp/*
 
 # copy game files
-COPY --chown=terraria:terraria --from=base /tshock/* /tshock
-
-# set the user
-USER terraria
+COPY --from=base /tshock/ /tshock/
 
 # Set working directory to server
 WORKDIR /tshock
