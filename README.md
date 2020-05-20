@@ -1,5 +1,4 @@
-[![](https://images.microbadger.com/badges/image/ryshe/terraria.svg)](https://microbadger.com/images/ryshe/terraria "Get your own image badge on microbadger.com")
-# Terraria
+# Terraria [![microbadger](https://images.microbadger.com/badges/image/ryshe/terraria.svg)](https://microbadger.com/images/ryshe/terraria "Get your own image badge on microbadger.com")
 
 **[UPDATE]** I know a lot of people are excited for Terraria v1.4 Journey's End!  This source code is built around the pre-release
 of [TShock][TShock].  Will continue to update as new releases come out.
@@ -49,7 +48,7 @@ Any `config.json` in the directory will automatically be loaded.  The `<world_fi
 
 Provision a linux machine that can support docker and containerization.  For more information visit [docker][Docker].  For a small or medium world with no more than 8 users a linux machine with 1-1.5GB of ram should suffice.  **If you are running a vm in the cloud, make sure to expose tcp port 7777 and udp port 7777.**
 
-Before starting the build process make sure the [lastest tshock version][TShock] is specified in the [Dockerfile](https://github.com/ryansheehan/terraria/blob/master/Dockerfile) under
+Before starting the build process make sure the [latest tshock version][TShock] is specified in the [Dockerfile](https://github.com/ryansheehan/terraria/blob/master/Dockerfile) under
 
 ```Dockerfile
 ADD https://github.com/Pryaxis/TShock/releases/download/v4.4.0-pre1/TShock_4.4.0_226_Pre1_Terraria1.4.0.2.zip /
@@ -77,7 +76,7 @@ Assuming [git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git) an
 Whether you build your own container, or use [my container](https://hub.docker.com/r/ryshe/terraria) published to docker hub,
 we are ready to run our terraria server!
 
-**Note:** For a full set of docker run options go (here)[https://docs.docker.com/engine/reference/run/]
+**Note:** For a full set of docker run options go [here](https://docs.docker.com/engine/reference/run/)
 
 ### First run
 
@@ -96,7 +95,7 @@ Let's break down this command:
 | `docker run` | tells linux to run a docker image |
 | `-it` | run interactively and output the text to terminal |
 | `--rm` | remove docker container when the container stops or fails |
-| `-p 7777:7777` | exposes terraria port <host machine side>:<container side> |
+| `-p 7777:7777` | exposes terraria port &lt;host machine side>:&lt;container side> |
 | `-v $HOME/terraria/world:/world` | maps a folder on the host machine into the container for saving the .wld file.  This does not have to be `$HOME/terraria/world`.  Anything left of the `:` is host machine directory |
 | `ryshe/terraria` | the name of the image. This could be your image if you build from source |
 | `:latest` | the tag, which defaults to `latest` if not specified.  `latest` is the most recently published container |
