@@ -4,9 +4,9 @@ RUN apk add --update-cache \
     unzip
 
 # Download and install TShock
-ADD https://github.com/Pryaxis/TShock/releases/download/v4.4.0-pre3/TShock_4.4.0_226_Pre3_Terraria1.4.0.2.zip /
-RUN unzip TShock_4.4.0_226_Pre3_Terraria1.4.0.2.zip -d /tshock && \
-    rm TShock_4.4.0_226_Pre3_Terraria1.4.0.2.zip && \
+ADD https://github.com/Pryaxis/TShock/releases/download/v4.4.0-pre4/TShock_4.4.0_226_Pre4v2_Terraria1.4.0.2.zip /
+RUN unzip TShock_4.4.0_226_Pre4v2_Terraria1.4.0.2.zip -d /tshock && \
+    rm TShock_4.4.0_226_Pre4v2_Terraria1.4.0.2.zip && \
     chmod +x /tshock/tshock/TerrariaServer.exe
 
 # Add bootstrap.sh and make sure it's executable.
