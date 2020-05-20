@@ -5,7 +5,7 @@ of [TShock][TShock].  Will continue to update as new releases come out.
 
 This project is a Dockerfile to containerize [TShock][TShock] and [Terraria](https://terraria.org/) TerrariaServer.exe to run on linux.  [Docker][Docker] will remove the need for someone to worry about how to setup a server in linux with all the right dependencies to run.  The installation and usage instructions are written with complete beginners in mind.
 
-## Quick start Guide (no need to pull this repository from git!)
+## Quick start guide
 
 First you need a linux machine with [Docker][Docker] installed. Everything from here on out assumes the docker service is running _(you may need to start the service after install)_.
 
@@ -43,6 +43,42 @@ sudo docker run -d --rm -p 7777:7777 -v $HOME/terraria/world:/world --name="terr
 **Note:** This command is designed to run in the background, and it is safe to close the terminal window.
 
 Any `config.json` in the directory will automatically be loaded.  The `<world_file_name>.wld` should be the name of your wld file in your $HOME/terraria/world directory.
+
+## Updating your container
+
+Updating is easy!  
+
+1. Grab the latest terraria container
+
+    ```bash
+    docker pull ryshe/terraria:latest
+    ```
+
+2. First we need to find our running container to stop, so we can later restart with the latest
+
+    ```bash
+    docker container ls | grep ryshe/terraria
+    ```
+
+    The first few numbers and letters, on a line, are the container hash.  Remember the first 3 or so letters or numbers
+
+    Example:
+
+    ```bash
+    f25261ac55a4        ryshe/terraria:latest   "/bin/sh bootstrap.s…"   3 minutes ago       Up 3 minutes        0.0.0.0:7777->7777/tcp, 7878/tcp   reverent_solomon
+    ```
+
+    `f25` would be the first few letters/numbers of the container hash
+
+    **NOTE:** If you see multiple lines, find the one that still has an `up` status.
+
+3. Stop and remove the container
+
+    ```bash
+    docker container rm -f xxx # xxx is the letters/numbers from the last step
+    ```
+
+4. Start your container again with your world _(see the [Quick start](#Quick-start-guide))_
 
 ## [Virtual] Machine Setup
 
