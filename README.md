@@ -22,7 +22,7 @@ mkdir -p $HOME/terraria/world
 For the first run you will need to generate a new world with a size where: _1=Small, 2=Medium, 3=Large_
 
 ```bash
-sudo docker run -it -p 7777:7777 --rm -v $HOME/terraria/world:/world ryshe/terraria:latest -world /world/<world_name_here>.wld -autocreate <world_size_number_here>
+sudo docker run -it -p 7777:7777 --rm -v $HOME/terraria/world:/root/.local/share/Terraria/Worlds ryshe/terraria:latest -world /root/.local/share/Terraria/Worlds/<world_name_here>.wld -autocreate <world_size_number_here>
 ```
 
 **Note:** If you close the the terminal, the server will stop running.  You will need to restart with a preexisting world. It may
@@ -31,13 +31,13 @@ be worth while to close after creation anyway to update the initial `config.json
 To create a world with a few more initial options, you can do so in an interactive mode.
 
 ```bash
-sudo docker run -it -p 7777:7777 --rm -v $HOME/terraria/world:/world ryshe/terraria:latest
+sudo docker run -it -p 7777:7777 --rm -v $HOME/terraria/world:/root/.local/share/Terraria/Worlds ryshe/terraria:latest
 ```
 
 ### To start with a preexisting world
 
 ```bash
-sudo docker run -d --rm -p 7777:7777 -v $HOME/terraria/world:/world --name="terraria" ryshe/terraria:latest -world /world/<world_file_name>.wld
+sudo docker run -d --rm -p 7777:7777 -v $HOME/terraria/world:/root/.local/share/Terraria/Worlds --name="terraria" -e WORLD_FILENAME=<.wld world_filename_here> ryshe/terraria:latest
 ```
 
 **Note:** This command is designed to run in the background, and it is safe to close the terminal window.
@@ -121,7 +121,7 @@ the server's config file.  You may wish to add the config file for many reasons,
 add a password to your server.
 
 ```bash
-docker run -it --rm -p 7777:7777 -v $HOME/terraria/world:/world ryshe/terraria:latest
+docker run -it --rm -p 7777:7777 -v $HOME/terraria/world:/root/.local/share/Terraria/Worlds ryshe/terraria:latest
 ```
 
 Let's break down this command:
@@ -132,7 +132,7 @@ Let's break down this command:
 | `-it` | run interactively and output the text to terminal |
 | `--rm` | remove docker container when the container stops or fails |
 | `-p 7777:7777` | exposes terraria port &lt;host machine side>:&lt;container side> |
-| `-v $HOME/terraria/world:/world` | maps a folder on the host machine into the container for saving the .wld file.  This does not have to be `$HOME/terraria/world`.  Anything left of the `:` is host machine directory |
+| `-v $HOME/terraria/world:/root/.local/share/Terraria/Worlds` | maps a folder on the host machine into the container for saving the .wld file.  This does not have to be `$HOME/terraria/world`.  Anything left of the `:` is host machine directory |
 | `ryshe/terraria` | the name of the image. This could be your image if you build from source |
 | `:latest` | the tag, which defaults to `latest` if not specified.  `latest` is the most recently published container |
 
@@ -144,7 +144,7 @@ Let's break down this command:
 After a world has been generated, you may want to load directly into it.  
 
 ```bash
-docker run -d --rm -p 7777:7777 -v $HOME/terraria/world:/world ryshe/terraria:latest -world /world/<world_filename_here>.wld
+docker run -d --rm -p 7777:7777 -v $HOME/terraria/world:/root/.local/share/Terraria/Worlds ryshe/terraria:latest -world /root/.local/share/Terraria/Worlds/<world_filename_here>.wld
 ```
 
 Let's break down the command:
@@ -152,7 +152,7 @@ Let's break down the command:
 | Command Part | Description |
 | ------------ | ----------- |
 | `-d` | run this in the background.  It is okay to close the terminal window, the container will continue to run |
-| `-world /world/<world_filename_here>.wld` | specifies the world file name you wish to immediately load into |
+| `-world /root/.local/share/Terraria/Worlds/<world_filename_here>.wld` | specifies the world file name you wish to immediately load into |
 
 * for the other parts check out the [First run](#First-run) section
 * check out additional server startup flags [here](https://tshock.readme.io/docs/command-line-parameters).  They go on
