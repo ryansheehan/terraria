@@ -7,9 +7,9 @@ RUN apk add --update-cache \
 COPY bootstrap.sh /tshock/bootstrap.sh
 
 # Download and unpack TShock
-ADD https://github.com/Pryaxis/TShock/releases/download/v4.4.0-pre6/TShock_4.4.0_Pre6_Terraria1.4.0.3.zip /
-RUN unzip TShock_4.4.0_Pre6_Terraria1.4.0.3.zip -d /tshock && \
-    rm TShock_4.4.0_Pre6_Terraria1.4.0.3.zip && \
+ADD https://github.com/Pryaxis/TShock/releases/download/v4.4.0-pre7/TShock.4.4.0.Pre-release.7.Entangled.for.Terraria.1.4.0.4.zip /
+RUN unzip TShock.4.4.0.Pre-release.7.Entangled.for.Terraria.1.4.0.4.zip -d /tshock && \
+    rm TShock.4.4.0.Pre-release.7.Entangled.for.Terraria.1.4.0.4.zip && \
     chmod +x /tshock/TerrariaServer.exe && \
     # add executable perm to bootstrap
     chmod +x /tshock/bootstrap.sh
