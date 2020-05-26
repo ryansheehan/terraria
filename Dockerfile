@@ -6,13 +6,14 @@ RUN apk add --update-cache \
 # add the bootstrap file
 COPY bootstrap.sh /tshock/bootstrap.sh
 
-ENV TSHOCKVERSION=v4.4.0-pre6
-ENV TSHOCKZIP=TShock_4.4.0_Pre6_Terraria1.4.0.3.zip
+ENV TSHOCKVERSION=v4.4.0-pre8
+ENV TSHOCKZIP=TShock_4.4.0_Pre8_Terraria1.4.0.4.zip
 
 # Download and unpack TShock
 ADD https://github.com/Pryaxis/TShock/releases/download/$TSHOCKVERSION/$TSHOCKZIP /
 RUN unzip $TSHOCKZIP -d /tshock && \
     rm $TSHOCKZIP && \
+
     chmod +x /tshock/TerrariaServer.exe && \
     # add executable perm to bootstrap
     chmod +x /tshock/bootstrap.sh
@@ -25,12 +26,12 @@ LABEL maintainer="Ryan Sheehan <rsheehan@gmail.com>"
 EXPOSE 7777 7878
 
 # env used in the bootstrap
-ENV WORLDPATH=/world
-ENV CONFIGPATH=/world
+ENV CONFIGPATH=/root/.local/share/Terraria/Worlds
 ENV LOGPATH=/tshock/logs
+ENV WORLD_FILENAME=""
 
 # Allow for external data
-VOLUME ["/world", "/tshock/logs", "/plugins"]
+VOLUME ["/root/.local/share/Terraria/Worlds", "/tshock/logs", "/plugins"]
 
 # install nuget to grab tshock dependencies
 RUN apt-get update -y && \
