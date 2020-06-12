@@ -12,7 +12,6 @@ ENV TSHOCKZIP=TShock4.4.0_Pre11_Terraria1.4.0.5.zip
 # Download and unpack TShock
 ADD https://github.com/Pryaxis/TShock/releases/download/$TSHOCKVERSION/$TSHOCKZIP /
 RUN unzip $TSHOCKZIP -d /tshock && \
-    rm $TSHOCKZIP && \
     chmod +x /tshock/TerrariaServer.exe && \
     # add executable perm to bootstrap
     chmod +x /tshock/bootstrap.sh
@@ -30,7 +29,10 @@ ENV LOGPATH=/tshock/logs
 ENV WORLD_FILENAME=""
 
 # Allow for external data
-VOLUME ["/root/.local/share/Terraria/Worlds", "/tshock/logs", "/plugins"]
+VOLUME ["/worlds", "/tshock/logs", "/plugins"]
+
+RUN mkdir -p /root/.local/share/Terraria/
+RUN ln -s /worlds /root/.local/share/Terraria/Worlds
 
 # install nuget to grab tshock dependencies
 RUN apt-get update -y && \
