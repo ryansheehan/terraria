@@ -2,10 +2,6 @@ name: Build Vanilla
 
 on:
   push:
-    branches:
-      -master
-    paths:
-      - vanilla/Dockerfile
     tags:
       - vanilla-*
 

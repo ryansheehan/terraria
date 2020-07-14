@@ -2,11 +2,6 @@ name: Build TShock
 
 on:
   push:
-    branches:
-      -master
-    paths:
-      - Dockerfile
-      - bootstrap.sh
     tags:
       - tshock-*
 
