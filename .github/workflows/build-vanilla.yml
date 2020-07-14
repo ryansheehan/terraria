@@ -1,0 +1,28 @@
+name: Build Vanilla
+
+on:
+  push:
+    branches:
+      -master
+    paths:
+      - vanilla/Dockerfile
+    tags:
+      - vanilla-*
+
+jobs:
+  build-vanilla:
+    name: build vanilla
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Publish TShock
+        uses: elgohr/Publish-Docker-Github-Action@master
+        with:
+          name: ryshe/terraria
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+          dockerfile: vanilla/Dockerfile
+          tags: "vanilla-latest"
+          tag_names: true

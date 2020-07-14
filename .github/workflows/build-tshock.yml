@@ -1,0 +1,29 @@
+name: Build TShock
+
+on:
+  push:
+    branches:
+      -master
+    paths:
+      - Dockerfile
+      - bootstrap.sh
+    tags:
+      - tshock-*
+
+jobs:
+  build-tshock:
+    name: build tshock
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Publish TShock
+        uses: elgohr/Publish-Docker-Github-Action@master
+        with:
+          name: ryshe/terraria
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+          dockerfile: tshock/Dockerfile
+          tags: "tshock-latest"
+          tag_names: true
