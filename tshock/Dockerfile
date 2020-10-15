@@ -12,6 +12,7 @@ ENV TSHOCKZIP=TShock4.4.0_Pre13_Terraria1.4.1.1.zip
 # Download and unpack TShock
 ADD https://github.com/Pryaxis/TShock/releases/download/$TSHOCKVERSION/$TSHOCKZIP /
 RUN unzip $TSHOCKZIP -d /tshock && \
+    mv /tshock/deploy/* /tshock/ && \
     rm $TSHOCKZIP && \
     chmod +x /tshock/TerrariaServer.exe && \
     # add executable perm to bootstrap
