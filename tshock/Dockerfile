@@ -6,7 +6,7 @@ RUN apk add --update-cache \
 # add the bootstrap file
 COPY bootstrap.sh /tshock/bootstrap.sh
 
-ENV TSHOCKVERSION=v4.40-pre13
+ENV TSHOCKVERSION=v4.4.0-pre13
 ENV TSHOCKZIP=TShock4.4.0_Pre13_Terraria1.4.1.1.zip
 
 # Download and unpack TShock
