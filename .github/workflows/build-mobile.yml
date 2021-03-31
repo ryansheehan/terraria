@@ -1,9 +1,9 @@
-name: Build Vanilla
+name: Build Mobile
 
 on:
   push:
     tags:
-      - vanilla-mobile-*
+      - mobile-*
 
 jobs:
   build-vanilla:
