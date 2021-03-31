@@ -1,4 +1,4 @@
-name: Build Vanilla Mobile
+name: Build Vanilla
 
 on:
   push:
