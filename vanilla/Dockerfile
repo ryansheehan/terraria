@@ -30,5 +30,5 @@ COPY --from=base /terraria-server/ /terraria-server/
 
 # add the bootstrap file
 COPY bootstrap.sh /terraria-server/bootstrap.sh
-
+RUN chmod +x /terraria-server/bootstrap.sh
 ENTRYPOINT ["/terraria-server/bootstrap.sh"]
