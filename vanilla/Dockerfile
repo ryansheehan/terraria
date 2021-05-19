@@ -24,4 +24,4 @@ VOLUME ["/root/.local/share/Terraria/Worlds", "/config"]
 
 COPY --from=base /terraria-server/ /terraria-server/
 
-ENTRYPOINT ["/terraria-server/TerrariaServer"]
+ENTRYPOINT ["mono", "/terraria-server/TerrariaServer.exe"]
