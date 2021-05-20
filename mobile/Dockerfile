@@ -13,11 +13,15 @@ RUN unzip /$DL_FILE -d /terraria-zip && \
     unzip /terraria-zip/Linux_MobileServer_${DL_VERSION}.zip -d /terraria && \
     mkdir /terraria-server && \
     mv /terraria/ServerLinux/* /terraria-server && \
+    rm /terraria-server/System* && \
+    rm /terraria-server/Mono* && \
+    rm /terraria-server/monoconfig && \
+    rm /terraria-server/mscorlib.dll && \
     chmod +x /terraria-server/TerrariaServer && \
     chmod +x /terraria-server/TerrariaServer.bin.x86 && \
     chmod +x /terraria-server/TerrariaServer.bin.x86_64
 
-FROM mono:6.8.0.96-slim
+FROM mono:6.12.0.107
 LABEL maintainer="Ryan Sheehan <rsheehan@gmail.com>"
 
 EXPOSE 7777
@@ -26,4 +30,4 @@ VOLUME ["/root/.local/share/Terraria/Worlds", "/config"]
 
 COPY --from=base /terraria-server/ /terraria-server/
 
-ENTRYPOINT ["/terraria-server/TerrariaServer"]
+ENTRYPOINT ["mono", "--server", "--gc=sgen", "-O=all", "/terraria-server/TerrariaServer.exe"]
