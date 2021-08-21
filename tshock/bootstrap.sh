@@ -4,6 +4,18 @@ echo "\nBootstrap:\nworld_file_name=$WORLD_FILENAME\nconfigpath=$CONFIGPATH\nlog
 echo "Copying plugins..."
 cp -Rfv /plugins/* ./ServerPlugins
 
+STORAGETYPE=$(cat $CONFIGPATH/config.json | jq -r '.StorageType')
+if [ $STORAGETYPE = "mysql" ]; then
+  DATABASE_SERVER=$(cat $CONFIGPATH/config.json | jq -r '.MySqlHost' | cut -f1 -d':')
+  DATABASE_PORT=$(cat $CONFIGPATH/config.json | jq -r '.MySqlHost' | cut -f2 -d':')
+  DATABASE_USER_NAME=$(cat $CONFIGPATH/config.json | jq -r '.MySqlUsername')
+  DATABASE_USER_PASSWORD=$(cat $CONFIGPATH/config.json | jq -r '.MySqlPassword')
+  echo "Waiting for the database server."
+  while ! mysql -h$DATABASE_SERVER -P$DATABASE_PORT -u$DATABASE_USER_NAME -p$DATABASE_USER_PASSWORD  -e ";" ; do
+    sleep 0.1;
+  done
+fi
+
 WORLD_PATH="/root/.local/share/Terraria/Worlds/$WORLD_FILENAME"
 
 if [ -z "$WORLD_FILENAME" ]; then

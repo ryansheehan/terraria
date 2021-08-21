@@ -1,4 +1,4 @@
-FROM alpine:3.11.6 AS base
+FROM alpine:3.14.1 AS base
 
 RUN apk add --update-cache \
     unzip
@@ -17,7 +17,7 @@ RUN unzip $TSHOCKZIP -d /tshock && \
     # add executable perm to bootstrap
     chmod +x /tshock/bootstrap.sh
 
-FROM mono:6.8.0.96
+FROM mono:6.12.0.107
 
 LABEL maintainer="Ryan Sheehan <rsheehan@gmail.com>"
 
@@ -34,7 +34,7 @@ VOLUME ["/root/.local/share/Terraria/Worlds", "/tshock/logs", "/plugins"]
 
 # install nuget to grab tshock dependencies
 RUN apt-get update -y && \
-    apt-get install -y nuget && \
+    apt-get install -y nuget mariadb-client jq && \
     rm -rf /var/lib/apt/lists/* /tmp/*
 
 # copy game files
