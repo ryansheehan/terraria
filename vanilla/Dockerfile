@@ -20,8 +20,15 @@ LABEL maintainer="Ryan Sheehan <rsheehan@gmail.com>"
 
 EXPOSE 7777
 
+# env used in the bootstrap
+ENV CONFIGPATH=/root/.local/share/Terraria/Worlds
+ENV WORLD_FILENAME=""
+
 VOLUME ["/root/.local/share/Terraria/Worlds", "/config"]
 
 COPY --from=base /terraria-server/ /terraria-server/
 
-ENTRYPOINT ["mono", "/terraria-server/TerrariaServer.exe"]
+# add the bootstrap file
+COPY bootstrap.sh /terraria-server/bootstrap.sh
+RUN chmod +x /terraria-server/bootstrap.sh
+ENTRYPOINT ["/terraria-server/bootstrap.sh"]
