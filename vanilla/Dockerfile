@@ -14,6 +14,7 @@ ADD $DL_LINK /$DL_FILE
 
 RUN unzip /$DL_FILE -d /terraria && \
     mv /terraria/$DL_VERSION/Linux/* /terraria-server && \
+    mv /terraria/$DL_VERSION/Windows/serverconfig.txt /terraria-server/serverconfig-default.txt && \ #Linux subfolder does not include any config text file, oddly.
     chmod +x /terraria-server/TerrariaServer && \
     chmod +x /terraria-server/TerrariaServer.bin.x86_64
 
