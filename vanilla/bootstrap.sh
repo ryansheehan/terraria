@@ -9,6 +9,8 @@ if [ -z "/config/serverconfig.txt" ]; then
     echo "Server configuration not found, running with default server configuration."
     echo "Please ensure your desired serverconfig.txt file is volumed into docker: -v <path_to_config_file>:/config"
     cp ./serverconfig-default.txt /config/serverconfig.txt
+else
+    echo "Server configuration file found. Running with server configuration file /config/serverconfig.txt"
 fi
 
 if [ -z "$WORLD_FILENAME" ]; then
