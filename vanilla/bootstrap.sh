@@ -5,7 +5,7 @@ echo "world_file_name=$WORLD_FILENAME"
 echo "logpath=$LOGPATH"
 
 WORLD_PATH="/root/.local/share/Terraria/Worlds/$WORLD_FILENAME"
-if [ -z "/config/serverconfig.txt" ]; then
+if [ ! -f "/config/serverconfig.txt" ]; then
     echo "Server configuration not found, running with default server configuration."
     echo "Please ensure your desired serverconfig.txt file is volumed into docker: -v <path_to_config_file>:/config"
     cp ./serverconfig-default.txt /config/serverconfig.txt
