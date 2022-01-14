@@ -3,22 +3,22 @@
 #remove the # in front of commands to enable them.
 
 #Load a world and automatically start the server.
-world=/terraria/myWorld.wld
+#world=/terraria/myWorld.wld
 
 #Creates a new world if none is found. World size is specified by: 1(small), 2(medium), and 3(large).
-autocreate=1
+#autocreate=1
 
 #Sets the name of the world when using autocreate
-worldname=myWorld
+#worldname=myWorld
 
 #Sets the difficulty of the world when using autocreate 0(classic), 1(expert), 2(master), 3(journey)
-difficulty=0
+#difficulty=0
 
 #Sets the max number of players allowed on a server.  Value must be between 1 and 255
-maxplayers=8
+#maxplayers=8
 
 #Set the port number
-port=7777
+#port=7777
 
 #Sets the world seed when using autocreate
 #seed=AwesomeSeed
