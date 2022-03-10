@@ -1,9 +1,9 @@
-FROM alpine:3.11.6 AS base
+FROM alpine:3.15.0 AS base
 
 RUN apk add --update-cache \
     unzip
 
-ENV DL_LINK=https://terraria.org/server/MobileTerrariaServer.zip
+ENV DL_LINK=https://terraria.org/api/download/mobile-dedicated-server/MobileTerrariaServer.zip
 ENV DL_VERSION=1_4_0_5
 ENV DL_FILE=MobileTerrariaServer.zip
 
@@ -21,7 +21,7 @@ RUN unzip /$DL_FILE -d /terraria-zip && \
     chmod +x /terraria-server/TerrariaServer.bin.x86 && \
     chmod +x /terraria-server/TerrariaServer.bin.x86_64
 
-FROM mono:6.12.0.107
+FROM mono:6.12.0.122-slim
 LABEL maintainer="Ryan Sheehan <rsheehan@gmail.com>"
 
 EXPOSE 7777

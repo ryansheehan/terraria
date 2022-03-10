@@ -1,4 +1,4 @@
-FROM alpine:3.11.6 AS base
+FROM alpine:3.15.0 AS base
 
 RUN apk add --update-cache \
     unzip
@@ -6,9 +6,9 @@ RUN apk add --update-cache \
 # add the bootstrap file
 COPY bootstrap.sh /terraria-server/bootstrap.sh
 
-ENV DL_LINK=https://terraria.org/api/download/pc-dedicated-server/terraria-server-1434.zip
-ENV DL_VERSION=1434
-ENV DL_FILE=terraria-server-1434.zip
+ENV DL_LINK=https://terraria.org/api/download/pc-dedicated-server/terraria-server-1436.zip
+ENV DL_VERSION=1436
+ENV DL_FILE=terraria-server-1436.zip
 
 ADD $DL_LINK /$DL_FILE
 
@@ -19,7 +19,7 @@ RUN unzip /$DL_FILE -d /terraria && \
     chmod +x /terraria-server/TerrariaServer && \
     chmod +x /terraria-server/TerrariaServer.bin.x86_64
 
-FROM mono:6.8.0.96-slim
+FROM mono:6.12.0.122-slim
 LABEL maintainer="Ryan Sheehan <rsheehan@gmail.com>"
 
 # documenting ports
