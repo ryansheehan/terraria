@@ -1,4 +1,4 @@
-FROM alpine:3.14.1 AS base
+FROM alpine:3.15.0 AS base
 
 RUN apk add --update-cache \
     unzip
@@ -7,8 +7,8 @@ RUN apk add --update-cache \
 COPY bootstrap.sh /tshock/bootstrap.sh
 COPY serverconfig.txt /tshock/serverconfig-default.txt
 
-ENV TSHOCKVERSION=v4.5.12
-ENV TSHOCKZIP=TShock4.5.12_Terraria1.4.3.2.zip
+ENV TSHOCKVERSION=v4.5.16
+ENV TSHOCKZIP=TShock4.5.16_Terraria1.4.3.6.zip
 
 # Download and unpack TShock
 ADD https://github.com/Pryaxis/TShock/releases/download/$TSHOCKVERSION/$TSHOCKZIP /
@@ -18,7 +18,7 @@ RUN unzip $TSHOCKZIP -d /tshock && \
     # add executable perm to bootstrap
     chmod +x /tshock/bootstrap.sh
 
-FROM mono:6.12.0.107
+FROM mono:6.12.0.122-slim
 
 LABEL maintainer="Ryan Sheehan <rsheehan@gmail.com>"
 
