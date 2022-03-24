@@ -19,7 +19,7 @@ RUN unzip /$DL_FILE -d /terraria && \
     chmod +x /terraria-server/TerrariaServer && \
     chmod +x /terraria-server/TerrariaServer.bin.x86_64
 
-FROM mono:6.12.0.122
+FROM mono:6.10.0.104-slim
 LABEL maintainer="Ryan Sheehan <rsheehan@gmail.com>"
 
 # documenting ports
