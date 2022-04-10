@@ -26,7 +26,7 @@ LABEL maintainer="Ryan Sheehan <rsheehan@gmail.com>"
 
 EXPOSE 7777
 
-VOLUME ["/root/.local/share/Terraria/Worlds", "/config"]
+VOLUME ["/root/.local/share/Terraria/Mobile", "/config"]
 
 COPY --from=base /terraria-server/ /terraria-server/
 
