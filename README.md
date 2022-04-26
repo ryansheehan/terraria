@@ -174,9 +174,9 @@ Mount the plugins directory with an additional -v switch on your `docker run ...
 
 ## Environment variables
 
-**Vanilla**
-
 Ability to overwrite file locations and file names
+
+**Vanilla**
 
 ```bash
 ENV LOGPATH=/terraria-server/logs
