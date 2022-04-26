@@ -27,9 +27,12 @@ EXPOSE 7777
 
 # env used in the bootstrap
 ENV LOGPATH=/terraria-server/logs
+ENV WORLDPATH=/root/.local/share/Terraria/Worlds
 ENV WORLD_FILENAME=""
+ENV CONFIGPATH=/config
+ENV CONFIG_FILENAME="serverconfig.txt"
 
-VOLUME ["/root/.local/share/Terraria/Worlds", "/config", "/terraria-server/logs"]
+VOLUME [ "${WORLDPATH}", "${CONFIGPATH}", "${LOGPATH}" ]
 
 COPY --from=base /terraria-server/ /terraria-server/
 
