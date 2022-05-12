@@ -186,6 +186,15 @@ ENV CONFIGPATH=/config
 ENV CONFIG_FILENAME="serverconfig.txt"
 ```
 
+**Tshock**
+
+```bash
+ENV LOGPATH=/tshock/logs
+ENV WORLDPATH=/root/.local/share/Terraria/Worlds
+ENV WORLD_FILENAME=""
+ENV CONFIGPATH=/root/.local/share/Terraria/Worlds
+```
+
 ## Logs
 
 A separate directory can be volumed in for storing logs outside of the image
