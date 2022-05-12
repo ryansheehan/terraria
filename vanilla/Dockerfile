@@ -19,7 +19,7 @@ RUN unzip /$DL_FILE -d /terraria && \
     chmod +x /terraria-server/TerrariaServer && \
     chmod +x /terraria-server/TerrariaServer.bin.x86_64
 
-FROM mono:6.12.0.122-slim
+FROM mono:6.10.0.104-slim
 LABEL maintainer="Ryan Sheehan <rsheehan@gmail.com>"
 
 # documenting ports
@@ -27,9 +27,12 @@ EXPOSE 7777
 
 # env used in the bootstrap
 ENV LOGPATH=/terraria-server/logs
+ENV WORLDPATH=/root/.local/share/Terraria/Worlds
 ENV WORLD_FILENAME=""
+ENV CONFIGPATH=/config
+ENV CONFIG_FILENAME="serverconfig.txt"
 
-VOLUME ["/root/.local/share/Terraria/Worlds", "/config", "/terraria-server/logs"]
+VOLUME [ "${WORLDPATH}", "${CONFIGPATH}", "${LOGPATH}" ]
 
 COPY --from=base /terraria-server/ /terraria-server/
 

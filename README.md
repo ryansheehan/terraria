@@ -46,7 +46,7 @@ Any `config.json` in the directory will automatically be loaded.  The `<world_fi
 
 ## Updating your container
 
-Updating is easy!  
+Updating is easy!
 
 1. Grab the latest terraria container
 
@@ -141,7 +141,7 @@ Let's break down this command:
 
 ### Running with an existing generated world
 
-After a world has been generated, you may want to load directly into it.  
+After a world has been generated, you may want to load directly into it.
 
 ```bash
 docker run -d --rm -p 7777:7777 -v $HOME/terraria/world:/root/.local/share/Terraria/Worlds ryshe/terraria:latest -world /root/.local/share/Terraria/Worlds/<world_filename_here>.wld
@@ -170,6 +170,20 @@ Mount the plugins directory with an additional -v switch on your `docker run ...
 
 ```bash
 -v <path_to_your_ServerPlugins_folder>:/plugins
+```
+
+## Environment variables
+
+Ability to overwrite file locations and file names
+
+**Vanilla**
+
+```bash
+ENV LOGPATH=/terraria-server/logs
+ENV WORLDPATH=/root/.local/share/Terraria/Worlds
+ENV WORLD_FILENAME=""
+ENV CONFIGPATH=/config
+ENV CONFIG_FILENAME="serverconfig.txt"
 ```
 
 ## Logs
