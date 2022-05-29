@@ -4,12 +4,11 @@ echo "\nBootstrap:\nworld_file_name=$WORLD_FILENAME\nconfigpath=$CONFIGPATH\nlog
 echo "Copying plugins..."
 cp -Rfv /plugins/* ./ServerPlugins
 
-STORAGETYPE=$(cat $CONFIGPATH/config.json | jq -r '.StorageType')
-if [ $STORAGETYPE = "mysql" ]; then
-  DATABASE_SERVER=$(cat $CONFIGPATH/config.json | jq -r '.MySqlHost' | cut -f1 -d':')
-  DATABASE_PORT=$(cat $CONFIGPATH/config.json | jq -r '.MySqlHost' | cut -f2 -d':')
-  DATABASE_USER_NAME=$(cat $CONFIGPATH/config.json | jq -r '.MySqlUsername')
-  DATABASE_USER_PASSWORD=$(cat $CONFIGPATH/config.json | jq -r '.MySqlPassword')
+if [ $(jq -r '.Settings.StorageType' $CONFIGPATH/config.json) = "mysql" ]; then
+  DATABASE_SERVER=$(jq -r '.Settings.MySqlHost' $CONFIGPATH/config.json | cut -f1 -d':')
+  DATABASE_PORT=$(jq -r '.Settings.MySqlHost' $CONFIGPATH/config.json | cut -f2 -d':')
+  DATABASE_USER_NAME=$(jq -r '.Settings.MySqlUsername' $CONFIGPATH/config.json)
+  DATABASE_USER_PASSWORD=$(jq -r '.Settings.MySqlPassword' $CONFIGPATH/config.json)
   echo "Waiting for the database server."
   while ! mysql -h$DATABASE_SERVER -P$DATABASE_PORT -u$DATABASE_USER_NAME -p$DATABASE_USER_PASSWORD  -e ";" ; do
     sleep 0.1;
