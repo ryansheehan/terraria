@@ -17,7 +17,8 @@ RUN unzip $TSHOCKZIP -d /tshock && \
     # add executable perm to bootstrap
     chmod +x /tshock/bootstrap.sh
 
-FROM mono:6.12.0.122-slim
+# do not use -slim due to mysql/tshock requirements
+FROM mono:6.12.0.122
 
 LABEL maintainer="Ryan Sheehan <rsheehan@gmail.com>"
 
