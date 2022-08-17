@@ -6,8 +6,8 @@ RUN apk add --update-cache \
 # add the bootstrap file
 COPY bootstrap.sh /tshock/bootstrap.sh
 
-ENV TSHOCKVERSION=v4.5.17
-ENV TSHOCKZIP=TShock4.5.17_Terraria_1.4.3.6.zip
+ENV TSHOCKVERSION=v4.5.18
+ENV TSHOCKZIP=TShock4.5.18_Terraria1.4.3.6.zip
 
 # Download and unpack TShock
 ADD https://github.com/Pryaxis/TShock/releases/download/$TSHOCKVERSION/$TSHOCKZIP /
@@ -17,7 +17,8 @@ RUN unzip $TSHOCKZIP -d /tshock && \
     # add executable perm to bootstrap
     chmod +x /tshock/bootstrap.sh
 
-FROM mono:6.12.0.122-slim
+# do not use -slim due to mysql/tshock requirements
+FROM mono:6.12.0.122
 
 LABEL maintainer="Ryan Sheehan <rsheehan@gmail.com>"
 
