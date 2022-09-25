@@ -158,6 +158,32 @@ Let's break down the command:
 * check out additional server startup flags [here](https://tshock.readme.io/docs/command-line-parameters).  They go on
 after the `ryshe/terraria:latest` portion of the line
 
+### Docker Compose example with previously generated world
+
+Here is a sample docker compose file that can be used to start the server. The command option lets you pass the flags needed to load the world and the config file.
+The stdin_open and tty options are a workaround to running the container in detached mode without crashing the server. 
+
+
+(Note for Podman users: Ensure to add the :Z flag to the volume to give the container access to the volume.)
+
+```yaml
+
+version: "3"
+services:
+  terraria:
+    container_name: terraria
+    image: ryshe/terraria:latest
+    stdin_open: true # docker run -i
+    tty: true # docker run -t
+
+    command: -world /root/.local/share/Terraria/Worlds/TerrariumServer.wld -config /root/.local/share/Terraria/Worlds/config.json
+    ports:
+      - 7777:7777
+    volumes:
+      - <world-dir-location>:/root/.local/share/Terraria/Worlds
+    restart: unless-stopped
+
+```
 ## Plugin support
 
 A volume exists to support plugins.  Create a folder, not inside your `/world` folder, for your plugins
