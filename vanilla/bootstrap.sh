@@ -18,7 +18,7 @@ if [ -z "$WORLD_FILENAME" ]; then
   else
     echo "Running server with command flags: $@"
   fi
-  mono TerrariaServer.exe -config "$CONFIGPATH/$CONFIG_FILENAME" -logpath "$LOGPATH" "$@"
+  ./TerrariaServer.bin.x86_64 -config "$CONFIGPATH/$CONFIG_FILENAME" -logpath "$LOGPATH" "$@"
 else
   echo "Environment WORLD_FILENAME specified"
   if [ -f "$WORLD_PATH" ]; then
