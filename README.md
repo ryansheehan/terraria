@@ -175,8 +175,9 @@ services:
     image: ryshe/terraria:latest
     stdin_open: true # docker run -i
     tty: true # docker run -t
-
-    command: -world /root/.local/share/Terraria/Worlds/TerrariumServer.wld -config /root/.local/share/Terraria/Worlds/config.json
+    environment:
+      - WORLD_FILENAME=world.wld
+      - CONFIGPATH: config.json
     ports:
       - 7777:7777
     volumes:
