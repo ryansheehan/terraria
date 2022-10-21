@@ -6,9 +6,9 @@ RUN apk add --update-cache \
 # add the bootstrap file
 COPY bootstrap.sh /terraria-server/bootstrap.sh
 
-ENV DL_LINK=https://terraria.org/api/download/pc-dedicated-server/terraria-server-1445.zip
-ENV DL_VERSION=1445
-ENV DL_FILE=terraria-server-1445.zip
+ENV DL_LINK=https://terraria.org/api/download/pc-dedicated-server/terraria-server-1446.zip
+ENV DL_VERSION=1446
+ENV DL_FILE=terraria-server-1446.zip
 
 ADD $DL_LINK /$DL_FILE
 
