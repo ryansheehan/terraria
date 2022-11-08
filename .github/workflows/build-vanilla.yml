@@ -1,9 +1,10 @@
 name: Build Vanilla
 
-on:
+on:  
   push:
     tags:
       - vanilla-*
+  workflow_dispatch:
 
 jobs:
   build-vanilla:
