@@ -1,27 +1,27 @@
-FROM alpine:3.15.0 AS base
+FROM alpine:3.16.3 AS base
 
 RUN apk add --update-cache \
     unzip
 
-ENV DL_LINK=https://terraria.org/api/download/mobile-dedicated-server/MobileTerrariaServer.zip
-ENV DL_VERSION=1_4_0_5
-ENV DL_FILE=MobileTerrariaServer.zip
+ENV DL_LINK=https://terraria.org/api/download/mobile-dedicated-server/terraria-server-1445.zip
+ENV DL_VERSION=1445
+ENV DL_FILE=terraria-server-1445.zip
 
 ADD $DL_LINK /$DL_FILE
 
-RUN unzip /$DL_FILE -d /terraria-zip && \ 
-    unzip /terraria-zip/Linux_MobileServer_${DL_VERSION}.zip -d /terraria && \
-    mkdir /terraria-server && \
-    mv /terraria/ServerLinux/* /terraria-server && \
-    rm /terraria-server/System* && \
-    rm /terraria-server/Mono* && \
-    rm /terraria-server/monoconfig && \
-    rm /terraria-server/mscorlib.dll && \
-    chmod +x /terraria-server/TerrariaServer && \
-    chmod +x /terraria-server/TerrariaServer.bin.x86 && \
-    chmod +x /terraria-server/TerrariaServer.bin.x86_64
+RUN unzip $DL_FILE && \ 
+    mkdir ./terraria-server  && \
+    mv ./$DL_VERSION/Linux/* ./terraria-server && \
+    rm ./terraria-server/System* && \
+    rm ./terraria-server/Mono* && \
+    rm ./terraria-server/monoconfig && \
+    rm ./terraria-server/mscorlib.dll && \
+    rm -r ./$DL_VERSION && \
+    rm -r ./$DL_FILE && \
+    chmod +x ./terraria-server/TerrariaServer && \
+    chmod +x ./terraria-server/TerrariaServer.bin.x86_64
 
-FROM mono:6.12.0.122-slim
+FROM mono:6.12.0.182
 LABEL maintainer="Ryan Sheehan <rsheehan@gmail.com>"
 
 EXPOSE 7777
