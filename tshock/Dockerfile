@@ -1,4 +1,4 @@
-FROM alpine:3.15.0 AS base
+FROM alpine:3.16.3 AS base
 
 RUN apk add --update-cache \
     unzip
