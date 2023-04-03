@@ -1,20 +1,30 @@
 FROM alpine:3.16.3 AS base
 
 RUN apk add --update-cache \
-    unzip
+    curl unzip
 
 # add the bootstrap file
 COPY bootstrap.sh /tshock/bootstrap.sh
 
 ENV TSHOCKVERSION=v5.1.3
-ENV TSHOCKZIP=TShock-5.1.3-for-Terraria-1.4.4.9-linux-x64-Release.zip
 
 # Download and unpack TShock
-ADD https://github.com/Pryaxis/TShock/releases/download/$TSHOCKVERSION/$TSHOCKZIP /
-RUN unzip $TSHOCKZIP -d /tshock && \    
-    tar -xvf /tshock/*.tar -C /tshock && \
-    rm $TSHOCKZIP && \
-    chmod +x /tshock/TShock.Server && \
+RUN set -eux; \
+    arch="$(apk --print-arch)"; \
+    case "$arch" in \
+        'x86_64') \
+            export TSHOCKZIP='TShock-5.1.3-for-Terraria-1.4.4.9-linux-x64-Release.zip'; \
+            ;; \
+        'aarch64') \
+            export TSHOCKZIP='TShock-5.1.3-for-Terraria-1.4.4.9-linux-arm64-Release.zip'; \
+            ;; \
+        *) echo >&2 "error: unsupported architecture '$arch'."; exit 1 ;; \
+    esac; \
+    curl -L -o /$TSHOCKZIP https://github.com/Pryaxis/TShock/releases/download/$TSHOCKVERSION/$TSHOCKZIP; \
+    unzip $TSHOCKZIP -d /tshock ; \    
+    tar -xvf /tshock/*.tar -C /tshock ; \
+    rm $TSHOCKZIP ; \
+    chmod +x /tshock/TShock.Server ; \
     # add executable perm to bootstrap
     chmod +x /tshock/bootstrap.sh
 
