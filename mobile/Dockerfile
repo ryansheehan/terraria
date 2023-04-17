@@ -1,4 +1,4 @@
-FROM alpine:3.16.3 AS base
+FROM alpine:3.17.3 AS base
 
 RUN apk add --update-cache \
     unzip
@@ -22,7 +22,11 @@ RUN unzip $DL_FILE && \
     chmod +x ./terraria-server/TerrariaServer.bin.x86_64
 
 FROM mono:6.12.0.182
-LABEL maintainer="Ryan Sheehan <rsheehan@gmail.com>"
+
+LABEL org.opencontainers.image.authors="Ryan Sheehan <rsheehan@gmail.com>"
+LABEL org.opencontainers.image.url="https://github.com/ryansheehan/terraria"
+LABEL org.opencontainers.image.documentation="Dockerfile for Terraria"
+LABEL org.opencontainers.image.source="https://github.com/ryansheehan/terraria/blob/master/mobile/Dockerfile"
 
 EXPOSE 7777
 

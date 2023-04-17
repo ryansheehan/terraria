@@ -1,4 +1,4 @@
-FROM alpine:3.16.3 AS base
+FROM alpine:3.17.3 AS base
 
 RUN apk add --update-cache \
     curl unzip
@@ -31,7 +31,10 @@ RUN set -eux; \
 # do not use -slim due to mysql/tshock requirements
 FROM mcr.microsoft.com/dotnet/runtime:6.0
 
-LABEL maintainer="Ryan Sheehan <rsheehan@gmail.com>"
+LABEL org.opencontainers.image.authors="Ryan Sheehan <rsheehan@gmail.com>"
+LABEL org.opencontainers.image.url="https://github.com/ryansheehan/terraria"
+LABEL org.opencontainers.image.documentation="Dockerfile for Terraria"
+LABEL org.opencontainers.image.source="https://github.com/ryansheehan/terraria/blob/master/tshock/Dockerfile"
 
 # documenting ports
 EXPOSE 7777 7878
