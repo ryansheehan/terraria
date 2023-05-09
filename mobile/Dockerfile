@@ -3,9 +3,9 @@ FROM alpine:3.17.3 AS base
 RUN apk add --update-cache \
     unzip
 
-ENV DL_LINK=https://terraria.org/api/download/mobile-dedicated-server/terraria-server-1445.zip
-ENV DL_VERSION=1445
-ENV DL_FILE=terraria-server-1445.zip
+ENV DL_VERSION=1449
+ENV DL_LINK=https://terraria.org/api/download/mobile-dedicated-server/terraria-server-$DL_VERSION.zip
+ENV DL_FILE=terraria-server-$DL_VERSION.zip
 
 ADD $DL_LINK /$DL_FILE
 
