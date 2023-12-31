@@ -31,21 +31,21 @@ RUN set -eux; \
 # do not use -slim due to mysql/tshock requirements
 FROM mcr.microsoft.com/dotnet/runtime:6.0
 
-LABEL org.opencontainers.image.authors="Logan Saso <logansaso+tech@gmail.com>"
-LABEL org.opencontainers.image.url="https://github.com/logaintech/terraria"
+LABEL org.opencontainers.image.authors="Ryan Sheehan <rsheehan@gmail.com>"
+LABEL org.opencontainers.image.url="https://github.com/ryansheehan/terraria"
 LABEL org.opencontainers.image.documentation="Dockerfile for Terraria"
-LABEL org.opencontainers.image.source="https://github.com/logansaso/terraria/blob/master/tshock/Dockerfile"
+LABEL org.opencontainers.image.source="https://github.com/ryansheehan/terraria/blob/master/tshock/Dockerfile"
 
 # documenting ports
 EXPOSE 7777 7878
 
 # env used in the bootstrap
-ENV WORLD_PATH=/root/.local/share/Terraria/Worlds
-ENV CONFIG_PATH=/config
-ENV LOG_PATH=/tshock/logs
+ENV CONFIGPATH=/root/.local/share/Terraria/Worlds
+ENV LOGPATH=/tshock/logs
+ENV WORLD_FILENAME=""
 
 # Allow for external data
-VOLUME ["/root/.local/share/Terraria/Worlds", "/config", "/tshock/logs", "/tshock/ServerPlugins"]
+VOLUME ["/root/.local/share/Terraria/Worlds", "/tshock/logs", "/plugins"]
 
 # install nuget to grab tshock dependencies
 RUN apt-get update -y && \
@@ -58,4 +58,5 @@ COPY --from=base /tshock/ /tshock/
 # Set working directory to server
 WORKDIR /tshock
 
+# run the bootstrap, which will copy the TShockAPI.dll before starting the server
 ENTRYPOINT [ "/bin/sh", "bootstrap.sh" ]
