@@ -54,6 +54,7 @@ RUN apt-get update -y && \
 
 # copy game files
 COPY --from=base /tshock/ /tshock/
+COPY --from=base /tshock/ServerPlugins /plugins/
 
 # Set working directory to server
 WORKDIR /tshock
