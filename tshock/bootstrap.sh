@@ -1,8 +1,13 @@
 #!/bin/bash
 
 echo "\nBootstrap:\nworld_file_name=$WORLD_FILENAME\nconfigpath=$CONFIGPATH\nlogpath=$LOGPATH\n"
-echo "Copying plugins..."
-cp -Rfv /plugins/* ./ServerPlugins
+
+# Copy plugins if the folder is empty (like on first run)
+if [ -z "$(ls -A /tshock/ServerPlugins)" ]; then
+  echo "Copying plugins..."
+  cp /plugins/* /tshock/ServerPlugins
+fi
+
 
 if [ $(jq -r '.Settings.StorageType' $CONFIGPATH/config.json) = "mysql" ]; then
   DATABASE_SERVER=$(jq -r '.Settings.MySqlHost' $CONFIGPATH/config.json | cut -f1 -d':')

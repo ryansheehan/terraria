@@ -54,6 +54,8 @@ RUN apt-get update -y && \
 
 # copy game files
 COPY --from=base /tshock/ /tshock/
+# Copy the plugin files to a place that bootstrap can copy them to the plugins folder at runtime
+COPY --from=base /tshock/ServerPlugins/ /plugins
 
 # Set working directory to server
 WORKDIR /tshock
