@@ -11,10 +11,5 @@ if [ $(jq -r '.Settings.StorageType' $CONFIG_PATH/config.json) = "mysql" ]; then
   done
 fi
 
-if [ -z "$(ls -A /tshock/ServerPlugins)" ]; then
-  echo "Copying plugins..."
-  cp /plugins/* /tshock/ServerPlugins
-fi
-
 echo "./TShock.Server -config \"$CONFIG_PATH/serverconfig.txt\" -configpath \"$CONFIG_PATH\" -logpath \"$LOG_PATH\" -worldpath /root/.local/share/Terraria/Worlds/ \"$@\""
 ./TShock.Server -config "$CONFIG_PATH/serverconfig.txt" -configpath "$CONFIG_PATH" -logpath "$LOG_PATH" -worldpath /root/.local/share/Terraria/Worlds/ "$@"
