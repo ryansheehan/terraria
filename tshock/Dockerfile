@@ -45,7 +45,7 @@ ENV LOGPATH=/tshock/logs
 ENV WORLD_FILENAME=""
 
 # Allow for external data
-VOLUME ["/root/.local/share/Terraria/Worlds", "/tshock/logs", "/plugins"]
+VOLUME ["/root/.local/share/Terraria/Worlds", "/tshock/logs", "/tshock/ServerPlugins", "/config"]
 
 # install nuget to grab tshock dependencies
 RUN apt-get update -y && \
