@@ -177,7 +177,7 @@ services:
     tty: true # docker run -t
     environment:
       - WORLD_FILENAME=world.wld
-      - CONFIGPATH=config.json
+      - CONFIGPATH=/config
     ports:
       - 7777:7777
     volumes:
