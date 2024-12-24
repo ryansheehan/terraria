@@ -1,4 +1,4 @@
-FROM alpine:3.17.3 AS base
+FROM alpine:3.21.0 AS base
 
 RUN apk add --update-cache \
     curl unzip
@@ -9,11 +9,13 @@ COPY bootstrap.sh /tshock/bootstrap.sh
 ENV TSHOCKVERSION=v5.2.1
 
 # Download and unpack TShock
+# https://github.com/Pryaxis/TShock/releases/download/v5.2.1/TShock-5.2.1-for-Terraria-1.4.4.9-linux-amd64-Release.zip
+# https://github.com/Pryaxis/TShock/releases/download/v5.2.1/TShock-5.2.1-for-Terraria-1.4.4.9-linux-arm64-Release.zip
 RUN set -eux; \
     arch="$(apk --print-arch)"; \
     case "$arch" in \
         'x86_64') \
-            export TSHOCKZIP='TShock-5.2.1-for-Terraria-1.4.4.9-linux-x64-Release.zip'; \
+            export TSHOCKZIP='TShock-5.2.1-for-Terraria-1.4.4.9-linux-amd64-Release.zip'; \
             ;; \
         'aarch64') \
             export TSHOCKZIP='TShock-5.2.1-for-Terraria-1.4.4.9-linux-arm64-Release.zip'; \
