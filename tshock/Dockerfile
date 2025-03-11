@@ -6,19 +6,19 @@ RUN apk add --update-cache \
 # add the bootstrap file
 COPY bootstrap.sh /tshock/bootstrap.sh
 
-ENV TSHOCKVERSION=v5.2.2
+ENV TSHOCKVERSION=v5.2.3
 
 # Download and unpack TShock
-# https://github.com/Pryaxis/TShock/releases/download/v5.2.2/TShock-5.2.2-for-Terraria-1.4.4.9-linux-amd64-Release.zip
-# https://github.com/Pryaxis/TShock/releases/download/v5.2.2/TShock-5.2.2-for-Terraria-1.4.4.9-linux-arm64-Release.zip
+# https://github.com/Pryaxis/TShock/releases/download/v5.2.3/TShock-5.2.3-for-Terraria-1.4.4.9-linux-amd64-Release.zip
+# https://github.com/Pryaxis/TShock/releases/download/v5.2.3/TShock-5.2.3-for-Terraria-1.4.4.9-linux-arm64-Release.zip
 RUN set -eux; \
     arch="$(apk --print-arch)"; \
     case "$arch" in \
         'x86_64') \
-            export TSHOCKZIP='TShock-5.2.2-for-Terraria-1.4.4.9-linux-amd64-Release.zip'; \
+            export TSHOCKZIP='TShock-5.2.3-for-Terraria-1.4.4.9-linux-amd64-Release.zip'; \
             ;; \
         'aarch64') \
-            export TSHOCKZIP='TShock-5.2.2-for-Terraria-1.4.4.9-linux-arm64-Release.zip'; \
+            export TSHOCKZIP='TShock-5.2.3-for-Terraria-1.4.4.9-linux-arm64-Release.zip'; \
             ;; \
         *) echo >&2 "error: unsupported architecture '$arch'."; exit 1 ;; \
     esac; \
