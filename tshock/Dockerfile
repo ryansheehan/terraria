@@ -1,5 +1,11 @@
 FROM alpine:3.21.0 AS base
 
+# Available environment variables:
+# TSHOCKVERSION="v5.2.2"
+# WORLD_FILENAME="world.wld"
+# CONFIGPATH="/tshock/config"
+# LOGPATH="/tshock/logs"
+
 RUN apk add --update-cache \
     curl unzip
 
