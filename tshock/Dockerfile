@@ -1,4 +1,4 @@
-FROM alpine:3.21.0 AS base
+FROM alpine:3.21 AS base
 
 # Available environment variables:
 # TSHOCKVERSION="v5.2.2"
