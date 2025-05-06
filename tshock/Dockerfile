@@ -1,3 +1,4 @@
+ARG DOTNETRUNTIME_VERSION=6.0
 FROM alpine:3.21 AS base
 
 # Available environment variables:
@@ -44,7 +45,7 @@ RUN set -eux; \
     chmod +x "/tshock/bootstrap.sh"
 
 # do not use -slim due to mysql/tshock requirements
-FROM mcr.microsoft.com/dotnet/runtime:6.0
+FROM mcr.microsoft.com/dotnet/runtime:${DOTNETRUNTIME_VERSION} AS runtime
 
 LABEL org.opencontainers.image.authors="Ryan Sheehan <rsheehan@gmail.com>"
 LABEL org.opencontainers.image.url="https://github.com/ryansheehan/terraria"
