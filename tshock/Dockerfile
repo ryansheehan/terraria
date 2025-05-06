@@ -20,18 +20,22 @@ ENV TSHOCKVERSION=v5.2.2
 RUN set -eux; \
     arch="$(apk --print-arch)"; \
     case "$arch" in \
-    'x86_64') \
-      export TSHOCKZIP='TShock-5.2.2-for-Terraria-1.4.4.9-linux-amd64-Release.zip' \
-      ;; \
-    'aarch64') \
-      export TSHOCKZIP='TShock-5.2.2-for-Terraria-1.4.4.9-linux-arm64-Release.zip' \
-      ;; \
+    'x86_64') arch_suffix="amd64" ;; \
+    'aarch64') arch_suffix="arm64" ;; \
     *) \
-      echo >&2 "error: unsupported architecture '$arch'." \
+      echo >&2 "error: unsupported architecture '$arch'."; \
       exit 1 \
       ;; \
     esac; \
-    curl -L -o /$TSHOCKZIP "https://github.com/Pryaxis/TShock/releases/download/$TSHOCKVERSION/$TSHOCKZIP"; \
+    # Get the asset list from GitHub API
+    if [ "${TSHOCKVERSION}" = "latest" ]; then \
+        RELEASE_URL="https://api.github.com/repos/Pryaxis/TShock/releases/latest"; \
+    else \
+        RELEASE_URL="https://api.github.com/repos/Pryaxis/TShock/releases/tags/$TSHOCKVERSION"; \
+    fi; \
+    TSHOCKURL=$(curl -s $RELEASE_URL | grep browser_download_url | grep "linux-$arch_suffix-Release.zip" | cut -d '"' -f 4); \
+    TSHOCKZIP=$(basename $TSHOCKURL); \
+    curl -L -o "/$TSHOCKZIP" "$TSHOCKURL"; \
     unzip "$TSHOCKZIP" -d "/tshock"; \
     tar -xvf "/tshock/"*.tar -C "/tshock"; \
     rm "$TSHOCKZIP"; \
