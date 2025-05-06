@@ -15,26 +15,29 @@ COPY bootstrap.sh /tshock/bootstrap.sh
 ENV TSHOCKVERSION=v5.2.2
 
 # Download and unpack TShock
-# https://github.com/Pryaxis/TShock/releases/download/v5.2.2/TShock-5.2.2-for-Terraria-1.4.4.9-linux-amd64-Release.zip
-# https://github.com/Pryaxis/TShock/releases/download/v5.2.2/TShock-5.2.2-for-Terraria-1.4.4.9-linux-arm64-Release.zip
+# x86_64:   https://github.com/Pryaxis/TShock/releases/download/v5.2.2/TShock-5.2.2-for-Terraria-1.4.4.9-linux-amd64-Release.zip
+# aarch64:  https://github.com/Pryaxis/TShock/releases/download/v5.2.2/TShock-5.2.2-for-Terraria-1.4.4.9-linux-arm64-Release.zip
 RUN set -eux; \
     arch="$(apk --print-arch)"; \
     case "$arch" in \
-        'x86_64') \
-            export TSHOCKZIP='TShock-5.2.2-for-Terraria-1.4.4.9-linux-amd64-Release.zip'; \
-            ;; \
-        'aarch64') \
-            export TSHOCKZIP='TShock-5.2.2-for-Terraria-1.4.4.9-linux-arm64-Release.zip'; \
-            ;; \
-        *) echo >&2 "error: unsupported architecture '$arch'."; exit 1 ;; \
+    'x86_64') \
+      export TSHOCKZIP='TShock-5.2.2-for-Terraria-1.4.4.9-linux-amd64-Release.zip' \
+      ;; \
+    'aarch64') \
+      export TSHOCKZIP='TShock-5.2.2-for-Terraria-1.4.4.9-linux-arm64-Release.zip' \
+      ;; \
+    *) \
+      echo >&2 "error: unsupported architecture '$arch'." \
+      exit 1 \
+      ;; \
     esac; \
-    curl -L -o /$TSHOCKZIP https://github.com/Pryaxis/TShock/releases/download/$TSHOCKVERSION/$TSHOCKZIP; \
-    unzip $TSHOCKZIP -d /tshock ; \    
-    tar -xvf /tshock/*.tar -C /tshock ; \
-    rm $TSHOCKZIP ; \
-    chmod +x /tshock/TShock.Server ; \
+    curl -L -o /$TSHOCKZIP "https://github.com/Pryaxis/TShock/releases/download/$TSHOCKVERSION/$TSHOCKZIP"; \
+    unzip "$TSHOCKZIP" -d "/tshock"; \
+    tar -xvf "/tshock/"*.tar -C "/tshock"; \
+    rm "$TSHOCKZIP"; \
+    chmod +x "/tshock/TShock.Server"; \
     # add executable perm to bootstrap
-    chmod +x /tshock/bootstrap.sh
+    chmod +x "/tshock/bootstrap.sh"
 
 # do not use -slim due to mysql/tshock requirements
 FROM mcr.microsoft.com/dotnet/runtime:6.0
