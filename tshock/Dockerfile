@@ -13,7 +13,7 @@ RUN apk add --update-cache \
 # add the bootstrap file
 COPY bootstrap.sh /tshock/bootstrap.sh
 
-ENV TSHOCKVERSION=v5.2.2
+ENV TSHOCKVERSION=v5.2.3
 
 # Download and unpack TShock
 # x86_64:   https://github.com/Pryaxis/TShock/releases/download/v5.2.2/TShock-5.2.2-for-Terraria-1.4.4.9-linux-amd64-Release.zip
