@@ -7,7 +7,7 @@ FROM alpine:3.21 AS base
 # CONFIGPATH="/tshock/config"
 # LOGPATH="/tshock/logs"
 
-RUN apk add --update-cache \
+RUN apk add --no-cache \
     curl unzip
 
 # add the bootstrap file

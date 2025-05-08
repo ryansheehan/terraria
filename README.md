@@ -1,9 +1,6 @@
 # Terraria
 
-**[UPDATE]** I know a lot of people are excited for Terraria v1.4 Journey's End!  This source code is built around the pre-release
-of [TShock][TShock].  Will continue to update as new releases come out.
-
-This project is a Dockerfile to containerize [TShock][TShock] and [Terraria](https://terraria.org/) TerrariaServer.exe to run on linux.  [Docker][Docker] will remove the need for someone to worry about how to setup a server in linux with all the right dependencies to run.  The installation and usage instructions are written with complete beginners in mind.
+This project is a Dockerfile to containerize [TShock][TShock] and [Terraria Server](https://terraria.org/) TerrariaServer.exe to run on linux.  [Docker][Docker] will remove the need for someone to worry about how to setup a server in linux with all the right dependencies to run.  The installation and usage instructions are written with complete beginners in mind.
 
 ## Quick start guide
 
@@ -87,7 +84,7 @@ Provision a linux machine that can support docker and containerization.  For mor
 Before starting the build process make sure the [latest tshock version][TShock] is specified in the [Dockerfile](https://github.com/ryansheehan/terraria/blob/master/Dockerfile) under
 
 ```Dockerfile
-ADD https://github.com/Pryaxis/TShock/releases/download/v4.4.0-pre1/TShock_4.4.0_226_Pre1_Terraria1.4.0.2.zip /
+ADD https://github.com/Pryaxis/TShock/releases/download/v5.2.3/TShock-5.2.3-for-Terraria-1.4.4.9-linux-amd64-Release.zip
 ```
 
 ## Building from source
