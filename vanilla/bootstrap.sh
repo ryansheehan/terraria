@@ -6,9 +6,9 @@ echo "logpath=$LOGPATH"
 
 WORLD_PATH="$WORLDPATH/$WORLD_FILENAME"
 if [ ! -f "$CONFIGPATH/$CONFIG_FILENAME" ]; then
-    echo "Server configuration not found, running with default server configuration."
-    echo "Please ensure your desired $CONFIG_FILENAME file is volumed into docker: -v <path_to_config_file>:/$CONFIGPATH"
-    cp ./serverconfig-default.txt $CONFIGPATH/$CONFIG_FILENAME
+  echo "Server configuration not found, running with default server configuration."
+  echo "Please ensure your desired $CONFIG_FILENAME file is volumed into docker: -v <path_to_config_file>:/$CONFIGPATH"
+  cp ./serverconfig-default.txt $CONFIGPATH/$CONFIG_FILENAME
 fi
 
 if [ -z "$WORLD_FILENAME" ]; then
@@ -30,4 +30,3 @@ else
     exit 1
   fi
 fi
-
