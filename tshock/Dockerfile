@@ -2,7 +2,7 @@ ARG DOTNETRUNTIME_VERSION=6.0
 FROM alpine:3.21 AS base
 
 # Available environment variables:
-# TSHOCKVERSION="v5.2.2"
+# TSHOCKVERSION="v5.2.4"
 # WORLD_FILENAME="world.wld"
 # CONFIGPATH="/tshock/config"
 # LOGPATH="/tshock/logs"
@@ -13,11 +13,11 @@ RUN apk add --no-cache \
 # add the bootstrap file
 COPY bootstrap.sh /tshock/bootstrap.sh
 
-ENV TSHOCKVERSION=v5.2.3
+ENV TSHOCKVERSION=v5.2.4
 
 # Download and unpack TShock
-# x86_64:   https://github.com/Pryaxis/TShock/releases/download/v5.2.2/TShock-5.2.2-for-Terraria-1.4.4.9-linux-amd64-Release.zip
-# aarch64:  https://github.com/Pryaxis/TShock/releases/download/v5.2.2/TShock-5.2.2-for-Terraria-1.4.4.9-linux-arm64-Release.zip
+# x86_64:   https://github.com/Pryaxis/TShock/releases/download/v5.2.4/TShock-5.2.4-for-Terraria-1.4.4.9-linux-amd64-Release.zip
+# aarch64:  https://github.com/Pryaxis/TShock/releases/download/v5.2.4/TShock-5.2.4-for-Terraria-1.4.4.9-linux-arm64-Release.zip
 RUN set -eux; \
     arch="$(apk --print-arch)"; \
     case "$arch" in \
