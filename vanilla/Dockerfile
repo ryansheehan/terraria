@@ -6,9 +6,9 @@ RUN apk add --update-cache \
 # add the bootstrap file
 COPY bootstrap.sh /terraria-server/bootstrap.sh
 
-ENV DL_LINK=https://terraria.org/api/download/pc-dedicated-server/terraria-server-1449.zip
-ENV DL_VERSION=1449
-ENV DL_FILE=terraria-server-1449.zip
+ENV DL_LINK=https://terraria.org/api/download/pc-dedicated-server/terraria-server-1450.zip
+ENV DL_VERSION=1450
+ENV DL_FILE=terraria-server-1450.zip
 
 ADD $DL_LINK /$DL_FILE
 
@@ -19,7 +19,7 @@ RUN unzip /$DL_FILE -d /terraria && \
     chmod +x /terraria-server/TerrariaServer && \
     chmod +x /terraria-server/TerrariaServer.bin.x86_64
 
-FROM mono:6.10-slim
+FROM ubuntu:24.04
 
 LABEL org.opencontainers.image.authors="Ryan Sheehan <rsheehan@gmail.com>"
 LABEL org.opencontainers.image.url="https://github.com/ryansheehan/terraria"
