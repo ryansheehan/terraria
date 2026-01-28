@@ -25,13 +25,13 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
       - name: Get Version
         id: get_version
-        run: echo ::set-output name=VERSION::${GITHUB_REF#refs/tags/}
+        run: echo "VERSION=${GITHUB_REF#refs/tags/}" >> $GITHUB_OUTPUT
       - name: Build and push
         uses: docker/build-push-action@v6
         with:
           context: ./vanilla
           file: vanilla/Dockerfile
-          platforms: linux/amd64,linux/arm/v7,linux/arm/v6,linux/arm64,linux/ppc64le          
+          platforms: linux/amd64,linux/arm/v7,linux/arm64,linux/ppc64le          
           push: true
           tags: |
             ryshe/terraria:vanilla-latest
