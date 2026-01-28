@@ -1,0 +1,77 @@
+# Use the command 'TerrariaServer -config serverconfig.txt' to use this configuration.
+# Please report crashes by emailing crashlog.txt to <support@terraria.org>.
+
+# Load a world and automatically start the server.
+world=/root/.local/share/Terraria/Worlds/world1.wld
+
+# Creates a new world if none is found. World size is specified by: 1(small), 2(medium), and 3(large).
+autocreate=1
+
+# Sets the world seed when using autocreate.
+seed=AwesomeSeed
+
+# Sets the name of the world when using autocreate.
+worldname=world1
+
+# Sets world difficulty when using -autocreate. Options: 0(normal), 1(expert), 2(master), 3(journey)
+difficulty=0
+
+# Sets the max number of players allowed on a server. Value must be between 1 and 255.
+maxplayers=8
+
+# Set the port number
+port=7777
+
+# Set the server password.
+password=catteeth
+
+# Set the message of the day.
+motd=AnarchyLime MOTD!
+
+# Sets the folder where world files will be stored.
+worldpath=/root/.local/share/Terraria/Worlds/
+
+# The location of the banlist. Defaults to banlist.txt in the working directory.
+banlist=banlist.txt
+
+# Adds addition cheat protection.
+secure=1
+
+# Sets the server language from its language code. 
+# Available codes:
+#   en/US = English
+#   de/DE = German
+#   it/IT = Italian
+#   fr/FR = French
+#   es/ES = Spanish
+#   ru/RU = Russian
+#   zh/Hans = Chinese
+#   pt/BR = Portuguese
+#   pl/PL = Polish
+language=en-US
+
+# Automatically forward ports with uPNP.
+#upnp=1
+
+# Reduces enemy skipping but increases bandwidth usage. The lower the number the less skipping will happen, but more data is sent. 0 is off.
+#npcstream=60
+
+# Default system priority 0:Realtime, 1:High, 2:AboveNormal, 3:Normal, 4:BelowNormal, 5:Idle
+#priority=1
+
+# Journey mode power permissions for every individual power. 0: Locked for everyone, 1: Can only be changed by host, 2: Can be changed by everyone
+#journeypermission_time_setfrozen=2
+#journeypermission_time_setdawn=2
+#journeypermission_time_setnoon=2
+#journeypermission_time_setdusk=2
+#journeypermission_time_setmidnight=2
+#journeypermission_godmode=2
+#journeypermission_wind_setstrength=2
+#journeypermission_rain_setstrength=2
+#journeypermission_time_setspeed=2
+#journeypermission_rain_setfrozen=2
+#journeypermission_wind_setfrozen=2
+#journeypermission_increaseplacementrange=2
+#journeypermission_setdifficulty=2
+#journeypermission_biomespread_setfrozen=2
+#journeypermission_setspawnrate=2
