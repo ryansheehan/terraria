@@ -16,8 +16,7 @@ RUN unzip /$DL_FILE -d /terraria && \
     mv /terraria/$DL_VERSION/Linux/* /terraria-server && \
     #Linux subfolder does not include any config text file, oddly.
     mv /terraria/$DL_VERSION/Windows/serverconfig.txt /terraria-server/serverconfig-default.txt && \
-    chmod +x /terraria-server/TerrariaServer && \
-    chmod +x /terraria-server/TerrariaServer.bin.x86_64
+    chmod +x /terraria-server/TerrariaServer*
 
 FROM ubuntu:24.04
 
