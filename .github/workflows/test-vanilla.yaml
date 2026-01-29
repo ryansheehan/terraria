@@ -1,0 +1,65 @@
+name: Test Vanilla Image
+
+on:
+  workflow_dispatch:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - 'vanilla/**'
+
+jobs:
+  build-and-push:
+    name: Build and Push Image
+    runs-on: ubuntu-24.04
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v6
+
+    - uses: jdx/mise-action@v2
+      with:
+        version: 2025.3.6
+        install: true
+        cache: true
+        experimental: false
+        log_level: debug
+        working_directory: .
+
+    - name: Set up QEMU
+      uses: docker/setup-qemu-action@v3
+
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v3
+      with:
+        platforms: linux/amd64,linux/arm/v7,linux/arm64,linux/ppc64le
+
+    - name: Get Version
+      id: get_version
+      run: echo "VERSION=${GITHUB_REF#refs/tags/}" >> $GITHUB_OUTPUT
+
+    - name: Build image locally
+      uses: docker/build-push-action@v6
+      with:
+        context: ./vanilla
+        file: vanilla/Dockerfile
+        platforms: linux/amd64,linux/arm/v7,linux/arm64,linux/ppc64le
+        push: false
+        tags: |
+          ryshe/terraria:vanilla-latest
+          ryshe/terraria:${{ steps.get_version.outputs.VERSION }}
+        cache-from: type=gha
+        cache-to: type=gha,mode=max
+    
+    - name: Prepare Python environment
+      working-directory: tests/
+      run: |
+        python -m venv venv
+        source venv/bin/activate
+        uv pip install -r requirements.txt
+
+    - name: Run pytest
+      run: |
+        pytest terraria_server_vanilla.py -v
+
+
