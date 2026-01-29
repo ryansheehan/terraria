@@ -3,6 +3,12 @@
 echo "Bootstrap:"
 echo "world_file_name=$WORLD_FILENAME"
 echo "logpath=$LOGPATH"
+echo "target_arch=$TARGETARCH"
+ 
+EXECUTABLE="./TerrariaServer"
+if [ "$TARGETARCH" = "arm64" ] || [ "$TARGETARCH" = "arm" ]; then
+  EXECUTABLE="mono ./TerrariaServer.exe"
+fi
 
 WORLD_PATH="$WORLDPATH/$WORLD_FILENAME"
 if [ ! -f "$CONFIGPATH/$CONFIG_FILENAME" ]; then
@@ -18,12 +24,12 @@ if [ -z "$WORLD_FILENAME" ]; then
   else
     echo "Running server with command flags: $@"
   fi  
-  ./TerrariaServer -config "$CONFIGPATH/$CONFIG_FILENAME" -logpath "$LOGPATH" "$@"
+  $EXECUTABLE -config "$CONFIGPATH/$CONFIG_FILENAME" -logpath "$LOGPATH" "$@"
 else
   echo "Environment WORLD_FILENAME specified"
   if [ -f "$WORLD_PATH" ]; then
     echo "Loading to world $WORLD_FILENAME..."    
-    ./TerrariaServer.exe -config "$CONFIGPATH/$CONFIG_FILENAME" -logpath "$LOGPATH" -world "$WORLD_PATH" "$@"
+    $EXECUTABLE -config "$CONFIGPATH/$CONFIG_FILENAME" -logpath "$LOGPATH" -world "$WORLD_PATH" "$@"
   else
     echo "Unable to locate $WORLD_PATH."
     echo "Please make sure your world file is volumed into docker: -v <path_to_world_file>:$WORLDPATH"
