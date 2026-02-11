@@ -5,7 +5,7 @@ RUN apt-get update && apt-get install -y unzip && rm -rf /var/lib/apt/lists/*
 # add the bootstrap file
 COPY bootstrap.sh /terraria-server/bootstrap.sh
 
-ENV DL_VERSION=1454
+ENV DL_VERSION=1455
 ENV DL_LINK=https://terraria.org/api/download/pc-dedicated-server/terraria-server-$DL_VERSION.zip
 ENV DL_FILE=terraria-server-$DL_VERSION.zip
 
