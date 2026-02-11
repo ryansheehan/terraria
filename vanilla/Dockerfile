@@ -20,6 +20,12 @@ RUN unzip /$DL_FILE -d /terraria && \
 FROM debian:trixie-slim
 ARG TARGETARCH
 
+# adding tmux for the console wrapper and procps for signal handling
+RUN apt-get update && apt-get install -y tmux procps && rm -rf /var/lib/apt/lists/*
+
+# required for tmux to work properly
+ENV TERM=xterm
+
 LABEL org.opencontainers.image.authors="Ryan Sheehan <rsheehan@gmail.com>"
 LABEL org.opencontainers.image.url="https://github.com/ryansheehan/terraria"
 LABEL org.opencontainers.image.documentation="Dockerfile for Terraria"
@@ -36,13 +42,19 @@ ENV CONFIGPATH=/config
 ENV CONFIG_FILENAME="serverconfig.txt"
 ENV TARGETARCH=${TARGETARCH}
 
+# create the logs directory explicitly
+RUN mkdir -p /terraria-server/logs
+
 COPY --from=base /terraria-server/ /terraria-server/
+
+# fix permissions so we can write to the log file
+RUN chmod -R 777 /terraria-server
 
 # Install mono-runtime when building for ARM
 RUN if [ "${TARGETARCH}" = "arm64" ] || [ "${TARGETARCH}" = "arm" ]; then \
-        apt-get update && apt-get install -y ca-certificates mono-runtime && rm -rf /var/lib/apt/lists/*; \
-        # The provided system.dll form terraria doesn't match the mono version.
-        mv /terraria-server/System.dll /usr/lib/mono/4.5/System.dll; \
+    apt-get update && apt-get install -y ca-certificates mono-runtime && rm -rf /var/lib/apt/lists/*; \
+    # The provided system.dll form terraria doesn't match the mono version.
+    mv /terraria-server/System.dll /usr/lib/mono/4.5/System.dll; \
     fi
 
 VOLUME [ "${WORLDPATH}", "${CONFIGPATH}", "${LOGPATH}" ]
@@ -50,4 +62,9 @@ VOLUME [ "${WORLDPATH}", "${CONFIGPATH}", "${LOGPATH}" ]
 # Set working directory to server
 WORKDIR /terraria-server
 
-ENTRYPOINT [ "/bin/sh", "bootstrap.sh" ]
+# check every 30s if the tmux session is still alive
+HEALTHCHECK --interval=30s --timeout=5s --start-period=10s --retries=3 \
+    CMD tmux has-session -t terraria || exit 1
+
+# using bash to handle signals better
+ENTRYPOINT [ "/bin/bash", "bootstrap.sh" ]
