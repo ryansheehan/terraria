@@ -1,4 +1,4 @@
-ARG DOTNETRUNTIME_VERSION=6.0
+ARG DOTNETRUNTIME_VERSION=9.0
 FROM alpine:3.23 AS base
 
 # Available environment variables:
