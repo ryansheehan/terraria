@@ -16,12 +16,12 @@ COPY bootstrap.sh /tshock/bootstrap.sh
 ENV TSHOCKVERSION=v6.1.0
 
 # Download and unpack TShock
-# x86_64:   https://github.com/Pryaxis/TShock/releases/download/v6.1.0/TShock-6.1.0-for-Terraria-1.4.5.6-linux-amd64-Release.zip
+# x86_64:   https://github.com/Pryaxis/TShock/releases/download/v6.1.0/TShock-6.1.0-for-Terraria-1.4.5.6-linux-x64-Release.zip
 # aarch64:  https://github.com/Pryaxis/TShock/releases/download/v6.1.0/TShock-6.1.0-for-Terraria-1.4.5.6-linux-arm64-Release.zip
 RUN set -eux; \
     arch="$(apk --print-arch)"; \
     case "$arch" in \
-    'x86_64') arch_suffix="amd64" ;; \
+    'x86_64') arch_suffix="x64" ;; \
     'aarch64') arch_suffix="arm64" ;; \
     *) \
       echo >&2 "error: unsupported architecture '$arch'."; \
