@@ -164,8 +164,6 @@ The stdin_open and tty options are a workaround to running the container in deta
 (Note for Podman users: Ensure to add the :Z flag to the volume to give the container access to the volume.)
 
 ```yaml
-
-version: "3"
 services:
   terraria:
     container_name: terraria
@@ -174,11 +172,11 @@ services:
     tty: true # docker run -t
     environment:
       - WORLD_FILENAME=world.wld
-      - CONFIGPATH=config.json
     ports:
       - 7777:7777
     volumes:
-      - <world-dir-location>:/root/.local/share/Terraria/Worlds
+      - <path-to-world-dir>:/root/.local/share/Terraria/Worlds
+      - <path-to-serverconfig.txt>:/config/serverconfig.txt
     restart: unless-stopped
 
 ```
