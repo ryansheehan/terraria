@@ -3,7 +3,7 @@ FROM debian:trixie-slim AS base
 RUN apt-get update && apt-get install -y unzip && rm -rf /var/lib/apt/lists/*
 
 # add the bootstrap file
-COPY bootstrap.sh /terraria-server/bootstrap.sh
+COPY bootstrap.sh shutdown-wrapper.sh /terraria-server/
 
 ENV DL_VERSION=1458
 ENV DL_LINK=https://terraria.org/api/download/pc-dedicated-server/terraria-server-$DL_VERSION.zip
@@ -50,4 +50,4 @@ VOLUME [ "${WORLDPATH}", "${CONFIGPATH}", "${LOGPATH}" ]
 # Set working directory to server
 WORKDIR /terraria-server
 
-ENTRYPOINT [ "/bin/sh", "bootstrap.sh" ]
+ENTRYPOINT [ "/bin/sh", "shutdown-wrapper.sh", "/bin/sh", "bootstrap.sh" ]
